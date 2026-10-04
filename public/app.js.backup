@@ -415,15 +415,14 @@ function renderCart() {
 
     container.appendChild(item);
 
-item
-  .querySelector(".remove-cart-item")
-  .addEventListener(
-    "click",
-    (event) => {
-      event.stopPropagation();
-      removeFromCart(index);
-    }
-  );
+    item
+      .querySelector(".remove-cart-item")
+      .addEventListener(
+        "click",
+        () => {
+          removeFromCart(index);
+        }
+      );
   });
 
   totalElement.textContent =
