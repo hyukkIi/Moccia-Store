@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Moccia Store</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <div class="background"></div>
+
+  <main class="page">
+
+    <header class="header">
+
+      <div class="logo">
+        Moccia Store
+      </div>
+
+      <div class="cart" onclick="openCart()">
+        🛒
+        <span id="cart-count">0</span>
+      </div>
+
+    </header>
+
+    <section class="hero">
+
+      <div class="hero-card">
+
+        <span class="small-title">
+          ✦ bem-vindo(a) ✦
+        </span>
+
+        <h1>
+          Moccia Store
+        </h1>
+
+        <p>
+          Escolha seu produto abaixo 💙
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="product-section">
+
+      <div class="section-title">
+        <span>🍰</span>
+        <h2>Seguidores no WhatsApp</h2>
+      </div>
+
+      <div
+        id="whatsapp-products"
+        class="product-scroll"
+      ></div>
+
+    </section>
+
+
+    <section class="product-section">
+
+      <div class="section-title">
+        <span>🍰</span>
+        <h2>Seguidores no Roblox</h2>
+      </div>
+
+      <div
+        id="roblox-products"
+        class="product-scroll"
+      ></div>
+
+    </section>
+
+
+    <section class="extra-section">
+
+      <div class="section-title">
+        <span>✨</span>
+        <h2>Outros produtos</h2>
+      </div>
+
+      <div
+        id="extra-products"
+        class="extra-grid"
+      ></div>
+
+    </section>
+
+
+    <footer>
+      <p>Moccia Store 💙</p>
+    </footer>
+
+  </main>
+
+
+  <div
+    id="payment-modal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box">
+
+      <button
+        class="close-button"
+        onclick="closePayment()"
+      >
+        ×
+      </button>
+
+<div id="terms-content" class="hidden">
+
+  <h2>Termos de compra</h2>
+
+  <div class="purchase-terms">
+
+    <p>
+      ፝֟💦 ݂ ` ᤺ ݁ ⵂ ݁ ㅤApós o pagamento NÃO fazemos reembolso.
+    </p>
+
+    <p>
+      ፝֟💦 ݂ ` ᤺ ݁ ⵂ ݁ ㅤAo comprar aqui, você entende que nosso serviço é terceirizado, então podem acontecer problemas que acabam fugindo do nosso controle.
+    </p>
+
+    <p>
+      ፝֟💦 ݂ ` ᤺ ݁ ⵂ ݁ ㅤNosso prazo de entrega é de 3/4 dias.
+    </p>
+
+    <p>
+      ፝֟💦 ݂ ` ᤺ ݁ ⵂ ݁ ㅤNão liberamos inspirações. Caso vejamos alguém usando cópia/inspiração na nossa loja, iremos denunciar.
+    </p>
+
+  </div>
+
+  <div class="terms-actions">
+
+    <button
+      type="button"
+      class="next-button"
+      onclick="nextToPayment()"
+    >
+      Próximo
+    </button>
+
+  </div>
+
+</div>
+
+<div id="payment-content">
+
+  <h2>Pagamento Pix</h2>
+
+  <p id="payment-product"></p>
+
+  <div class="price-big">
+    R$ <span id="payment-price">0,00</span>
+  </div>
+
+  <p class="pix-label">
+    Chave Pix
+  </p>
+
+  <div class="pix-copy">
+
+    <input
+      id="pix-code"
+      value="gojosatorunaomorreu@gmail.com"
+      readonly
+    >
+
+    <button onclick="copyPix()">
+      Copiar
+    </button>
+
+  </div>
+
+  <p class="payment-info">
+    Após fazer o pagamento, envie o comprovante para:
+  </p>
+
+  <a
+    class="whatsapp-payment"
+    href="https://wa.me/559391595706"
+    target="_blank"
+  >
+    📱 93 91595-5706
+  </a>
+
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div id="cart-modal" class="cart-modal hidden">
+
+    <div class="cart-card">
+
+      <button class="cart-close" onclick="closeCart()">×</button>
+      <h2>🛒 Seu carrinho</h2>
+
+      <div id="cart-items"></div>
+
+      <div class="cart-total">
+        Total: R$ <span id="cart-total">0,00</span>
+      </div>
+
+      <button class="buy-button cart-buy" onclick="buyCart()">
+        Comprar tudo
+      </button>
+
+    </div>
+
+  </div>
+
+  <div
+    id="loading-screen"
+    class="loading-screen hidden"
+  >
+
+    <div class="loading-card">
+
+      <div class="loader"></div>
+
+      <h2>
+        Estamos te direcionando
+        para receber seu pedido
+      </h2>
+
+      <p>
+        Aguarde um instante...
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <script src="/app.js"></script>
+
+</body>
+
+</html>
