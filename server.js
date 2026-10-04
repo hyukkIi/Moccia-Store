@@ -2,8 +2,16 @@ const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
 const QRCode = require("qrcode");
+const { Pool } = require("pg");
 
 dotenv.config();
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,7 +20,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
-
 
 /* =========================
    PRODUTOS

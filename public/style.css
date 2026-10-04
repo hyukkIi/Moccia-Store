@@ -1195,3 +1195,13 @@ body.notification-open {
   z-index: 9999;
   touch-action: auto;
 }
+
+/* ================================
+   ESTILO DAS AVALIAÇÕES
+================================ */
+
+  transform: translateY(3px);
+  box-shadow:
+    0 2px 0 #6faed0,
+    0 4px 8px rgba(60, 130, 170, 0.2);
+}
