@@ -1,3 +1,18 @@
+const visitorId = localStorage.getItem("moccia_visitor_id") ||
+  (() => {
+    const id = crypto.randomUUID();
+    localStorage.setItem("moccia_visitor_id", id);
+    return id;
+  })();
+
+fetch("/api/visit", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ visitorId })
+});
+
 let selectedProduct = null;
 
 const whatsappProducts =
