@@ -29,6 +29,27 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.post("/api/visit", async (req, res) => {
+  try {
+    const { visitorId } = req.body;
+
+    if (!visitorId) {
+      return res.status(400).json({ error: "visitorId ausente" });
+    }
+
+    await pool.query(
+      "INSERT INTO store_visits (visitor_id) VALUES ($1)",
+      [visitorId]
+    );
+
+    res.json({ success: true });
+
+  } catch (error) {
+    console.error("Erro ao registrar visita:", error);
+    res.status(500).json({ error: "Erro ao registrar visita" });
+  }
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
