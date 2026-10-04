@@ -1028,3 +1028,170 @@ a:focus,
 .bonequinho:focus {
   outline: none;
 }
+
+/* ESCOLHA DO TUTORIAL */
+
+#tutorial-choice-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.tutorial-choice-box {
+  position: relative;
+
+  width: 100%;
+  max-width: 430px;
+
+  padding: 28px 22px;
+
+  border-radius: 24px;
+
+  background: white;
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.25);
+
+  text-align: center;
+
+  animation: tutorialChoiceIn 0.25s ease;
+}
+
+.tutorial-choice-box h2 {
+  margin: 5px 25px 25px;
+
+  font-size: 20px;
+  line-height: 1.35;
+
+  color: #222;
+}
+
+.tutorial-choice-close {
+  position: absolute;
+
+  top: 10px;
+  right: 12px;
+
+  width: 35px;
+  height: 35px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f1f1f1;
+
+  font-size: 25px;
+  line-height: 35px;
+
+  cursor: pointer;
+}
+
+.tutorial-choice-options {
+  display: flex;
+
+  gap: 12px;
+}
+
+.tutorial-choice-option {
+  flex: 1;
+
+  min-height: 150px;
+
+  padding: 18px 10px;
+
+  border: 2px solid #e8e8e8;
+  border-radius: 18px;
+
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tutorial-choice-option:hover {
+  transform: translateY(-3px);
+
+  border-color: #7b61ff;
+
+  box-shadow:
+    0 8px 20px rgba(123, 97, 255, 0.15);
+}
+
+.tutorial-choice-option:active {
+  transform: scale(0.97);
+}
+
+.tutorial-choice-option .choice-icon {
+  font-size: 32px;
+}
+
+.tutorial-choice-option strong {
+  font-size: 15px;
+
+  color: #222;
+}
+
+.tutorial-choice-option > span:last-child {
+  font-size: 17px;
+
+  font-weight: bold;
+
+  color: #7b61ff;
+}
+
+@keyframes tutorialChoiceIn {
+
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}
+
+
+/* BLOQUEIA A TELA ENQUANTO A NOTIFICAÇÃO ESTÁ ABERTA */
+
+body.notification-open {
+  overflow: hidden;
+}
+
+#cart-notification-overlay {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 9998;
+
+  touch-action: none;
+}
+
+#cart-notification-overlay #cart-notification {
+  z-index: 9999;
+  touch-action: auto;
+}

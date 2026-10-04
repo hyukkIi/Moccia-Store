@@ -237,6 +237,16 @@ function nextToPayment() {
 
 function addToCart(product) {
 
+  if (
+    product.name === "Painel de Números Fake" ||
+    product.name === "Painel de Seguidores"
+  ) {
+
+    showTutorialChoice(product);
+
+    return;
+  }
+
   let cart =
     JSON.parse(
       localStorage.getItem("cart") || "[]"
@@ -256,14 +266,197 @@ function addToCart(product) {
   showCartNotification();
 }
 
+function showTutorialChoice(product) {
+
+  const oldModal =
+    document.getElementById("tutorial-choice-modal");
+
+  if (oldModal) {
+    oldModal.remove();
+  }
+
+  const modal =
+    document.createElement("div");
+
+  modal.id = "tutorial-choice-modal";
+
+  modal.innerHTML = `
+    <div class="tutorial-choice-box">
+
+      <button
+        type="button"
+        class="tutorial-choice-close"
+        onclick="document.getElementById('tutorial-choice-modal').remove()"
+      >
+        ×
+      </button>
+
+      <h2>
+        Deseja comprar apenas o produto,
+        ou o produto + vídeo tutorial?
+      </h2>
+
+      <div class="tutorial-choice-options">
+
+        <button
+          type="button"
+          class="tutorial-choice-option"
+          onclick='confirmTutorialChoice(${JSON.stringify(product)}, false)'
+        >
+          <span class="choice-icon">📦</span>
+
+          <strong>
+            Apenas o produto
+          </strong>
+
+          <span>
+            R$ 10,00
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="tutorial-choice-option"
+          onclick='confirmTutorialChoice(${JSON.stringify(product)}, true)'
+        >
+          <span class="choice-icon">🎥</span>
+
+          <strong>
+            Produto + tutorial
+          </strong>
+
+          <span>
+            R$ 13,00
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+function showTutorialChoiceBuy(product) {
+
+  const oldModal =
+    document.getElementById("tutorial-choice-modal");
+
+  if (oldModal) {
+    oldModal.remove();
+  }
+
+  const modal =
+    document.createElement("div");
+
+  modal.id = "tutorial-choice-modal";
+
+  modal.innerHTML = `
+    <div class="tutorial-choice-box">
+
+      <button
+        type="button"
+        class="tutorial-choice-close"
+        onclick="document.getElementById('tutorial-choice-modal').remove()"
+      >
+        ×
+      </button>
+
+      <h2>
+        Deseja comprar apenas o produto,
+        ou o produto + vídeo tutorial?
+      </h2>
+
+      <div class="tutorial-choice-options">
+
+        <button
+          type="button"
+          class="tutorial-choice-option"
+          onclick='confirmTutorialBuy(${JSON.stringify(product)}, false)'
+        >
+          <span class="choice-icon">📦</span>
+
+          <strong>
+            Apenas o produto
+          </strong>
+
+          <span>
+            R$ 10,00
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="tutorial-choice-option"
+          onclick='confirmTutorialBuy(${JSON.stringify(product)}, true)'
+        >
+          <span class="choice-icon">🎥</span>
+
+          <strong>
+            Produto + tutorial
+          </strong>
+
+          <span>
+            R$ 13,00
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+function confirmTutorialChoice(product, withTutorial) {
+
+  const modal =
+    document.getElementById("tutorial-choice-modal");
+
+  if (modal) {
+    modal.remove();
+  }
+
+  const selectedProduct = {
+    ...product,
+    price: withTutorial ? 13 : 10,
+    tutorialSelected: withTutorial
+  };
+
+  let cart =
+    JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
+
+  cart.push(selectedProduct);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  updateCartCount();
+
+  renderCart();
+
+  showCartNotification();
+}
+
 function showCartNotification() {
 
-  const oldNotification =
-    document.getElementById("cart-notification");
+  const oldOverlay =
+    document.getElementById("cart-notification-overlay");
 
-  if (oldNotification) {
-    oldNotification.remove();
+  if (oldOverlay) {
+    oldOverlay.remove();
   }
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.id = "cart-notification-overlay";
 
   const notification =
     document.createElement("div");
@@ -282,16 +475,56 @@ function showCartNotification() {
     <button
       type="button"
       class="cart-notification-ok"
-      onclick="document.getElementById('cart-notification').remove()"
     >
       ok
     </button>
   `;
 
-  document.body.appendChild(notification);
+  overlay.appendChild(notification);
+
+  document.body.appendChild(overlay);
+
+  document.body.classList.add("notification-open");
+
+  function closeNotification() {
+
+    overlay.remove();
+
+    document.body.classList.remove(
+      "notification-open"
+    );
+  }
+
+  notification
+    .querySelector(".cart-notification-ok")
+    .addEventListener(
+      "click",
+      closeNotification
+    );
+
+  overlay.addEventListener(
+    "click",
+    function(event) {
+
+      if (event.target === overlay) {
+        closeNotification();
+      }
+
+    }
+  );
 }
 
 async function buyProduct(product) {
+
+  if (
+    product.name === "Painel de Números Fake" ||
+    product.name === "Painel de Seguidores"
+  ) {
+
+    showTutorialChoiceBuy(product);
+
+    return;
+  }
 
   selectedProduct = product;
 
@@ -434,7 +667,9 @@ function renderCart() {
       .addEventListener(
         "click",
         (event) => {
+
           event.stopPropagation();
+
           removeFromCart(index);
         }
       );
@@ -521,110 +756,133 @@ function buyCart() {
 }
 
 loadProducts();
+
 updateCartCount();
 
 // Efeito de toque duplo rápido
 let lastTap = 0;
 
-document.addEventListener("pointerup", function (event) {
+document.addEventListener(
+  "pointerup",
+  function(event) {
 
-  const now = Date.now();
+    const now = Date.now();
 
-  if (now - lastTap < 250) {
+    if (now - lastTap < 250) {
 
-    const img =
-      document.createElement("img");
+      const img =
+        document.createElement("img");
 
-    img.src = "/efeito.png";
+      img.src = "/efeito.png";
 
-    img.className =
-      "double-click-effect";
+      img.className =
+        "double-click-effect";
 
-    const offsetX =
-      Math.random() * 30 - 15;
+      const offsetX =
+        Math.random() * 30 - 15;
 
-    const offsetY =
-      Math.random() * 30 - 15;
+      const offsetY =
+        Math.random() * 30 - 15;
 
-    const rotation =
-      Math.random() * 50 - 25;
+      const rotation =
+        Math.random() * 50 - 25;
 
-    img.style.left =
-      `${event.clientX + offsetX}px`;
+      img.style.left =
+        `${event.clientX + offsetX}px`;
 
-    img.style.top =
-      `${event.clientY + offsetY}px`;
+      img.style.top =
+        `${event.clientY + offsetY}px`;
 
-    img.style.setProperty(
-      "--rotation",
-      `${rotation}deg`
-    );
+      img.style.setProperty(
+        "--rotation",
+        `${rotation}deg`
+      );
 
-    document.body.appendChild(img);
+      document.body.appendChild(img);
 
-    setTimeout(() => {
-      img.remove();
-    }, 450);
+      setTimeout(() => {
+        img.remove();
+      }, 450);
+    }
+
+    lastTap = now;
   }
+);
 
-  lastTap = now;
-});
-
-const welcomeCharacter = document.querySelector(".welcome-character");
+const welcomeCharacter =
+  document.querySelector(".welcome-character");
 
 if (welcomeCharacter) {
 
-  welcomeCharacter.addEventListener("click", () => {
+  welcomeCharacter.addEventListener(
+    "click",
+    () => {
 
-    const colors = [
-      "#4da6ff",
-      "#ff69b4",
-      "#7dc8ff",
-      "#ff9bd2"
-    ];
+      const colors = [
+        "#4da6ff",
+        "#ff69b4",
+        "#7dc8ff",
+        "#ff9bd2"
+      ];
 
-    const rect = welcomeCharacter.getBoundingClientRect();
+      const rect =
+        welcomeCharacter.getBoundingClientRect();
 
-    const originX = rect.left + rect.width / 2;
-    const originY = rect.top + rect.height / 2;
+      const originX =
+        rect.left + rect.width / 2;
 
-    for (let i = 0; i < 18; i++) {
+      const originY =
+        rect.top + rect.height / 2;
 
-      const confetti = document.createElement("span");
+      for (let i = 0; i < 18; i++) {
 
-      confetti.className = "confetti";
+        const confetti =
+          document.createElement("span");
 
-      confetti.style.background =
-        colors[Math.floor(Math.random() * colors.length)];
+        confetti.className =
+          "confetti";
 
-      confetti.style.left = `${originX}px`;
-      confetti.style.top = `${originY}px`;
+        confetti.style.background =
+          colors[
+            Math.floor(
+              Math.random() * colors.length
+            )
+          ];
 
-      const angle = Math.random() * Math.PI * 2;
-      const distance = 35 + Math.random() * 55;
+        confetti.style.left =
+          `${originX}px`;
 
-      confetti.style.setProperty(
-        "--x",
-        `${Math.cos(angle) * distance}px`
-      );
+        confetti.style.top =
+          `${originY}px`;
 
-      confetti.style.setProperty(
-        "--y",
-        `${Math.sin(angle) * distance}px`
-      );
+        const angle =
+          Math.random() * Math.PI * 2;
 
-      confetti.style.setProperty(
-        "--r",
-        `${Math.random() * 720 - 360}deg`
-      );
+        const distance =
+          35 + Math.random() * 55;
 
-      document.body.appendChild(confetti);
+        confetti.style.setProperty(
+          "--x",
+          `${Math.cos(angle) * distance}px`
+        );
 
-      setTimeout(() => {
-        confetti.remove();
-      }, 650);
+        confetti.style.setProperty(
+          "--y",
+          `${Math.sin(angle) * distance}px`
+        );
+
+        confetti.style.setProperty(
+          "--r",
+          `${Math.random() * 720 - 360}deg`
+        );
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 650);
+      }
+
     }
-
-  });
-
+  );
 }
