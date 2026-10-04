@@ -13,6 +13,16 @@ const pool = new Pool({
   }
 });
 
+pool.query(`
+  CREATE TABLE IF NOT EXISTS store_visits (
+    id SERIAL PRIMARY KEY,
+    visitor_id TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )
+`).catch(err => {
+  console.error("Erro ao criar tabela de visitas:", err);
+});
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -20,6 +30,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use((req, res, next) => {
+
+  if (req.path === "/" || req.path === "/index.html") {
+
+    let visitorId = req.headers["x-forwarded-for"];
+
+    if (!visitorId) {
+      visitorId = req.ip;
+    }
+
+    visitorId = visitorId.split(",")[0].trim();
+
+    pool.query(
+      "INSERT INTO store_visits (visitor_id) VALUES ($1)",
+      [visitorId]
+    ).catch(err => {
+      console.error("Erro ao registrar visita:", err);
+    });
+  }
+
+  next();
+});
 
 /* =========================
    PRODUTOS
