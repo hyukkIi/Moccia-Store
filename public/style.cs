@@ -28,7 +28,7 @@ body {
 .background {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -2;
 
   background:
     linear-gradient(
@@ -42,11 +42,6 @@ body {
   filter: blur(5px);
 
   transform: scale(1.06);
-}
-
-.page {
-  position: relative;
-  z-index: 1;
 }
 
 .page {
@@ -816,215 +811,24 @@ footer {
 /* Efeito da imagem no clique duplo */
 .double-click-effect {
   position: fixed;
-  width: 140px;
-  height: 140px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
   pointer-events: none;
   z-index: 99999;
 
-  transform: translate(-50%, -50%) rotate(var(--rotation));
-animation: doubleClickFloat 0.40s ease-out forwards;}
+  transform: translate(-50%, -50%);
+  animation: doubleClickFloat 1s ease-out forwards;
+}
 
 @keyframes doubleClickFloat {
   0% {
     opacity: 1;
-    transform: translate(-50%, -50%) rotate(var(--rotation)) scale(1);
+    transform: translate(-50%, -50%) translateY(0) scale(1);
   }
 
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) translateY(-100px)
-               rotate(calc(var(--rotation) + 15deg))
-               scale(0.8);
+    transform: translate(-50%, -50%) translateY(-100px) scale(0.8);
   }
-}
-
-/* Primeiras duas fileiras: 4 cards largos por vez */
-.product-section:nth-of-type(1) .product-card,
-.product-section:nth-of-type(2) .product-card {
-  flex: 0 0 calc((100% - 36px) / 4);
-  min-width: 0;
-  min-height: 175px;
-  box-sizing: border-box;
-}
-
-/* Dá espaço para o conteúdo não ser cortado */
-.product-section:nth-of-type(1) .product-scroll,
-.product-section:nth-of-type(2) .product-scroll {
-  min-height: 215px;
-  padding-bottom: 25px;
-}
-
-/* CORREÇÃO DEFINITIVA DO CORTE DAS DUAS PRIMEIRAS FILEIRAS */
-.product-section:nth-of-type(1),
-.product-section:nth-of-type(2) {
-  overflow: visible !important;
-}
-
-.product-section:nth-of-type(1) .product-scroll,
-.product-section:nth-of-type(2) .product-scroll {
-  overflow-x: auto !important;
-  overflow-y: visible !important;
-  min-height: 230px !important;
-  height: 230px !important;
-  padding-top: 8px !important;
-  padding-bottom: 35px !important;
-}
-
-.product-section:nth-of-type(1) .product-card,
-.product-section:nth-of-type(2) .product-card {
-  min-height: 175px !important;
-  height: 175px !important;
-  overflow: visible !important;
-}
-
-/* Primeiras duas fileiras: 4 cards largos por vez */
-.product-section:nth-of-type(1) .product-card,
-.product-section:nth-of-type(2) .product-card {
-  flex: 0 0 calc((100% - 36px) / 4);
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-}
-
-/* Diminui o símbolo apenas nos produtos de Seguidores no Roblox */
-.product-section:nth-of-type(2) .product-icon {
-  font-size: 5px !important;
-}
-
-/* ✨ BRILHO AZUL PASTEL NOS TÍTULOS */
-.logo,
-.section-title h2 {
-  background: linear-gradient(
-    110deg,
-    currentColor 0%,
-    currentColor 38%,
-    #a9ddff 48%,
-    #d8f1ff 50%,
-    #a9ddff 52%,
-    currentColor 62%,
-    currentColor 100%
-  );
-
-  background-size: 300% 100%;
-  background-position: 150% 0;
-
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: titleShine 7s ease-in-out infinite;
-}
-
-@keyframes titleShine {
-  0% {
-    background-position: 150% 0;
-  }
-
-  18% {
-    background-position: -150% 0;
-  }
-
-  100% {
-    background-position: -150% 0;
-  }
-}
-
-.hero-card {
-  position: relative;
-}
-
-.welcome-character {
-  position: absolute;
-  width: 120px;
-  height: auto;
-  top: -90px;
-  right: 60px;
-  z-index: 10;
-
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-.confetti {
-  position: fixed;
-
-  width: 7px;
-  height: 12px;
-
-  border-radius: 2px;
-
-  z-index: 9999;
-
-  pointer-events: none;
-
-  animation: confetti-explosion 650ms ease-out forwards;
-}
-
-@keyframes confetti-explosion {
-
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform:
-      translate(var(--x), var(--y))
-      rotate(360deg);
-  }
-
-}
-
-.confetti {
-  position: fixed;
-
-  width: 7px;
-  height: 12px;
-
-  border-radius: 2px;
-
-  z-index: 9999;
-
-  pointer-events: none;
-
-  animation: confetti-explosion 650ms ease-out forwards;
-}
-
-@keyframes confetti-explosion {
-
-  0% {
-    opacity: 1;
-    transform:
-      translate(0, 0)
-      rotate(0deg)
-      scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform:
-      translate(var(--x), var(--y))
-      rotate(var(--r))
-      scale(0.7);
-  }
-
-}
-
-/* Remove o quadrado azul ao tocar no bonequinho */
-button,
-img,
-a,
-.bonequinho {
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-}
-
-button:focus,
-img:focus,
-a:focus,
-.bonequinho:focus {
-  outline: none;
 }

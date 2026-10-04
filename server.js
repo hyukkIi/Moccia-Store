@@ -215,10 +215,115 @@ const products = [
     category: "roblox",
     quantity: "1K",
     price: 13.00
+  },
+
+  // NÚMEROS FAKE
+
+  {
+    id: "fake-indonesia",
+    name: "🇮🇩 Indonésia",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 8.50
+  },
+
+  {
+    id: "fake-afeganistao",
+    name: "🇦🇫 Afeganistão",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 8.50
+  },
+
+  {
+    id: "fake-angola",
+    name: "🇦🇴 Angola",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 8.50
+  },
+
+  {
+    id: "fake-filipinas",
+    name: "🇵🇭 Filipinas",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 9.50
+  },
+
+  {
+    id: "fake-marrocos",
+    name: "🇲🇦 Marrocos",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 9.50
+  },
+
+  {
+    id: "fake-ucrania",
+    name: "🇺🇦 Ucrânia",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 10.50
+  },
+
+  {
+    id: "fake-canada",
+    name: "🇨🇦 Canadá",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 11.50
+  },
+
+  {
+    id: "fake-argentina",
+    name: "🇦🇷 Argentina",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 19.50
+  },
+
+  {
+    id: "fake-brasil",
+    name: "🇧🇷 Brasil",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 27.50
+  },
+
+  {
+    id: "fake-japao",
+    name: "🇯🇵 Japão",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 27.50
+  },
+
+  {
+    id: "fake-portugal",
+    name: "🇵🇹 Portugal",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 29.00
+  },
+
+  {
+    id: "fake-alemanha",
+    name: "🇩🇪 Alemanha",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 30.00
+  },
+
+  {
+    id: "fake-china",
+    name: "🇨🇳 China",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 30.00
   }
 
 ];
-
 
 /* =========================
    PRODUTOS EXTRAS

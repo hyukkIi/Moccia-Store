@@ -9,6 +9,9 @@ const robloxProducts =
 const extraProducts =
   document.getElementById("extra-products");
 
+const fakeNumberProducts =
+  document.getElementById("fake-number-products");
+
 const cartProducts = [
   "Painel de Números Fake",
   "Painel de Seguidores",
@@ -34,6 +37,13 @@ async function loadProducts() {
       product => product.category === "roblox"
     ),
     robloxProducts
+  );
+
+  renderProducts(
+    data.products.filter(
+      product => product.category === "fake-number"
+    ),
+    fakeNumberProducts
   );
 
   renderExtraProducts(data.extraProducts);
@@ -79,7 +89,11 @@ function renderProducts(products, container) {
       </div>
 
       <h3>
-        ${product.quantity || product.name}
+        ${
+          product.category === "fake-number"
+            ? product.name
+            : (product.quantity || product.name)
+        }
       </h3>
 
       <div class="extra-price">
@@ -415,15 +429,15 @@ function renderCart() {
 
     container.appendChild(item);
 
-item
-  .querySelector(".remove-cart-item")
-  .addEventListener(
-    "click",
-    (event) => {
-      event.stopPropagation();
-      removeFromCart(index);
-    }
-  );
+    item
+      .querySelector(".remove-cart-item")
+      .addEventListener(
+        "click",
+        (event) => {
+          event.stopPropagation();
+          removeFromCart(index);
+        }
+      );
   });
 
   totalElement.textContent =
@@ -508,3 +522,109 @@ function buyCart() {
 
 loadProducts();
 updateCartCount();
+
+// Efeito de toque duplo rápido
+let lastTap = 0;
+
+document.addEventListener("pointerup", function (event) {
+
+  const now = Date.now();
+
+  if (now - lastTap < 250) {
+
+    const img =
+      document.createElement("img");
+
+    img.src = "/efeito.png";
+
+    img.className =
+      "double-click-effect";
+
+    const offsetX =
+      Math.random() * 30 - 15;
+
+    const offsetY =
+      Math.random() * 30 - 15;
+
+    const rotation =
+      Math.random() * 50 - 25;
+
+    img.style.left =
+      `${event.clientX + offsetX}px`;
+
+    img.style.top =
+      `${event.clientY + offsetY}px`;
+
+    img.style.setProperty(
+      "--rotation",
+      `${rotation}deg`
+    );
+
+    document.body.appendChild(img);
+
+    setTimeout(() => {
+      img.remove();
+    }, 450);
+  }
+
+  lastTap = now;
+});
+
+const welcomeCharacter = document.querySelector(".welcome-character");
+
+if (welcomeCharacter) {
+
+  welcomeCharacter.addEventListener("click", () => {
+
+    const colors = [
+      "#4da6ff",
+      "#ff69b4",
+      "#7dc8ff",
+      "#ff9bd2"
+    ];
+
+    const rect = welcomeCharacter.getBoundingClientRect();
+
+    const originX = rect.left + rect.width / 2;
+    const originY = rect.top + rect.height / 2;
+
+    for (let i = 0; i < 18; i++) {
+
+      const confetti = document.createElement("span");
+
+      confetti.className = "confetti";
+
+      confetti.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+      confetti.style.left = `${originX}px`;
+      confetti.style.top = `${originY}px`;
+
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 35 + Math.random() * 55;
+
+      confetti.style.setProperty(
+        "--x",
+        `${Math.cos(angle) * distance}px`
+      );
+
+      confetti.style.setProperty(
+        "--y",
+        `${Math.sin(angle) * distance}px`
+      );
+
+      confetti.style.setProperty(
+        "--r",
+        `${Math.random() * 720 - 360}deg`
+      );
+
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 650);
+    }
+
+  });
+
+}
