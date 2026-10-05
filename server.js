@@ -3,6 +3,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const QRCode = require("qrcode");
 const { Pool } = require("pg");
+const session = require("express-session");
 
 dotenv.config();
 
@@ -25,6 +26,15 @@ pool.query(`
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || "moccia-secret",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 30
+  }
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
