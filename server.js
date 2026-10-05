@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const QRCode = require("qrcode");
 const { Pool } = require("pg");
 const session = require("express-session");
+const crypto = require("crypto");
 
 dotenv.config();
 
@@ -41,11 +42,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post("/api/visit", async (req, res) => {
   try {
-    const { visitorId } = req.body;
+if (!req.session.visitorId) {
+  req.session.visitorId = crypto.randomUUID();
+}
 
-    if (!visitorId) {
-      return res.status(400).json({ error: "visitorId ausente" });
-    }
+const visitorId = req.session.visitorId;
 
     await pool.query(
       "INSERT INTO store_visits (visitor_id) VALUES ($1)",
@@ -84,28 +85,7 @@ app.get("/api/visit-stats", async (req, res) => {
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use((req, res, next) => {
-
-  if (req.path === "/" || req.path === "/index.html") {
-
-    let visitorId = req.headers["x-forwarded-for"];
-
-    if (!visitorId) {
-      visitorId = req.ip;
-    }
-
-    visitorId = visitorId.split(",")[0].trim();
-
-    pool.query(
-      "INSERT INTO store_visits (visitor_id) VALUES ($1)",
-      [visitorId]
-    ).catch(err => {
-      console.error("Erro ao registrar visita:", err);
-    });
-  }
-
-  next();
-});
+app.use(express.static(path.join(__dirname, "public")));
 
 /* =========================
    PRODUTOS
