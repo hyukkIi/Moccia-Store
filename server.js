@@ -50,6 +50,28 @@ app.post("/api/visit", async (req, res) => {
   }
 });
 
+app.get("/api/visit-stats", async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT
+        COUNT(*) AS total_views,
+        COUNT(DISTINCT visitor_id) AS unique_visitors
+      FROM store_visits
+    `);
+
+    res.json({
+      totalViews: Number(result.rows[0].total_views),
+      uniqueVisitors: Number(result.rows[0].unique_visitors)
+    });
+
+  } catch (error) {
+    console.error("Erro ao buscar estatísticas:", error);
+    res.status(500).json({
+      error: "Erro ao buscar estatísticas"
+    });
+  }
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
