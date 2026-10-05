@@ -557,6 +557,99 @@ app.post("/api/pix", async (req, res) => {
 
 });
 
+/* =========================
+   PAINEL DE ESTATÍSTICAS
+========================= */
+
+app.get("/admin", async (req, res) => {
+
+  const senha = req.query.senha;
+
+  if (senha !== process.env.ADMIN_PASSWORD) {
+    return res.status(401).send("Acesso negado.");
+  }
+
+  try {
+
+    const result = await pool.query(`
+      SELECT
+        COUNT(*) AS total_views,
+        COUNT(DISTINCT visitor_id) AS unique_visitors
+      FROM store_visits
+    `);
+
+    const totalViews = Number(result.rows[0].total_views);
+    const uniqueVisitors = Number(result.rows[0].unique_visitors);
+
+    res.send(`
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Painel Moccia Store</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+          }
+
+          .card {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.1);
+          }
+
+          .stat {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 15px;
+            background: #eee;
+          }
+
+          .number {
+            font-size: 40px;
+            font-weight: bold;
+          }
+        </style>
+      </head>
+
+      <body>
+
+        <div class="card">
+
+          <h1>📊 Moccia Store</h1>
+
+          <div class="stat">
+            <div>👥 Visitantes únicos</div>
+            <div class="number">${uniqueVisitors}</div>
+          </div>
+
+          <div class="stat">
+            <div>👁️ Visualizações</div>
+            <div class="number">${totalViews}</div>
+          </div>
+
+        </div>
+
+      </body>
+      </html>
+    `);
+
+  } catch (error) {
+
+    console.error("Erro no painel:", error);
+
+    res.status(500).send("Erro ao carregar estatísticas.");
+
+  }
+
+});
 
 /* =========================
    PÁGINA NÃO ENCONTRADA
