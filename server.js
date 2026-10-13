@@ -116,7 +116,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "100",
-    price: 3.90
+    price: 1.90
   },
 
   {
@@ -124,7 +124,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "200",
-    price: 4.90
+    price: 2.50
   },
 
   {
@@ -132,7 +132,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "300",
-    price: 5.90
+    price: 3.50
   },
 
   {
@@ -140,7 +140,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "400",
-    price: 6.50
+    price: 4.50
   },
 
   {
@@ -148,7 +148,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "500",
-    price: 7.50
+    price: 5.50
   },
 
   {
@@ -156,7 +156,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "600",
-    price: 8.50
+    price: 6.50
   },
 
   {
@@ -164,7 +164,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "700",
-    price: 9.50
+    price: 7.50
   },
 
   {
@@ -172,7 +172,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "800",
-    price: 10.50
+    price: 8.50
   },
 
   {
@@ -180,7 +180,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "900",
-    price: 12.50
+    price: 9.50
   },
 
   {
@@ -188,9 +188,24 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "1K",
-    price: 15.50
+    price: 13.00
   },
 
+  {
+    id: "whatsapp-2k",
+    name: "Seguidores WhatsApp",
+    category: "whatsapp",
+    quantity: "2K",
+    price: 18.50
+  },
+
+  {
+    id: "whatsapp-3k",
+    name: "Seguidores WhatsApp",
+    category: "whatsapp",
+    quantity: "3K",
+    price: 23.50
+  },
 
   // ROBLOX
 
@@ -297,7 +312,7 @@ const products = [
     name: "🇮🇩 Indonésia",
     category: "fake-number",
     quantity: "Número Fake",
-    price: 8.50
+    price: 6.00
   },
 
   {
@@ -321,7 +336,7 @@ const products = [
     name: "🇵🇭 Filipinas",
     category: "fake-number",
     quantity: "Número Fake",
-    price: 9.50
+    price: 6.00
   },
 
   {
@@ -361,7 +376,7 @@ const products = [
     name: "🇧🇷 Brasil",
     category: "fake-number",
     quantity: "Número Fake",
-    price: 27.50
+    price: 28.50
   },
 
   {
@@ -369,7 +384,7 @@ const products = [
     name: "🇯🇵 Japão",
     category: "fake-number",
     quantity: "Número Fake",
-    price: 27.50
+    price: 28.50
   },
 
   {
@@ -407,13 +422,13 @@ const extraProducts = [
   {
     id: "fornecedor-robux",
     name: "Fornecedor de Robux no DC",
-    price: 2.00
+    price: 1.50
   },
 
   {
     id: "fornecedor-streaming",
     name: "Fornecedor de Streaming no DC",
-    price: 3.00
+    price: 1.50
   },
 
   {
@@ -428,8 +443,12 @@ const extraProducts = [
     name: "Painel de Números Fake",
     price: 10.00,
     tutorialPrice: 13.00
+  },
+  {
+    id: "apk-premium-divulgacao",
+    name: "APK Premium para Bot de Divulgação",
+    price: 9.00
   }
-
 ];
 
 

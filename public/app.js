@@ -459,6 +459,23 @@ function confirmTutorialChoice(product, withTutorial) {
   showCartNotification();
 }
 
+function confirmTutorialBuy(product, withTutorial) {
+
+  const modal = document.getElementById("tutorial-choice-modal");
+
+  if (modal) {
+    modal.remove();
+  }
+
+  const selectedProduct = {
+    ...product,
+    price: withTutorial ? 13 : 10,
+    tutorialSelected: withTutorial
+  };
+
+  buyProduct(selectedProduct);
+}
+
 function showCartNotification() {
 
   const oldOverlay =
