@@ -95,21 +95,7 @@ const products = [
 
   // WHATSAPP
 
-  {
-    id: "whatsapp-50",
-    name: "Seguidores WhatsApp",
-    category: "whatsapp",
-    quantity: "50",
-    price: 1.50
-  },
-
-  {
-    id: "whatsapp-70",
-    name: "Seguidores WhatsApp",
-    category: "whatsapp",
-    quantity: "70",
-    price: 2.00
-  },
+  // WHATSAPP
 
   {
     id: "whatsapp-100",
