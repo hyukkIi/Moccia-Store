@@ -110,7 +110,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "200",
-    price: 2.50
+    price: 2.80
   },
 
   {
@@ -118,7 +118,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "300",
-    price: 3.50
+    price: 3.80
   },
 
   {
@@ -126,7 +126,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "400",
-    price: 4.50
+    price: 4.80
   },
 
   {
@@ -134,7 +134,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "500",
-    price: 5.50
+    price: 5.80
   },
 
   {
@@ -142,7 +142,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "600",
-    price: 6.50
+    price: 6.80
   },
 
   {
@@ -150,7 +150,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "700",
-    price: 7.50
+    price: 7.80
   },
 
   {
@@ -158,7 +158,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "800",
-    price: 8.50
+    price: 8.80
   },
 
   {
@@ -166,7 +166,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "900",
-    price: 9.50
+    price: 9.80
   },
 
   {
@@ -182,7 +182,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "2K",
-    price: 18.50
+    price: 17.00
   },
 
   {
@@ -190,7 +190,15 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "3K",
-    price: 23.50
+    price: 21.00
+  },
+
+  {
+    id: "whatsapp-5k",
+    name: "Seguidores WhatsApp",
+    category: "whatsapp",
+    quantity: "5K",
+    price: 31.00
   },
 
   // ROBLOX
@@ -291,6 +299,179 @@ const products = [
     price: 13.00
   },
 
+
+  // TIKTOK: CURTIDAS + VISUALIZAÇÕES
+  {
+    id: "tiktok-100",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "100",
+    price: 1.50
+  },
+  {
+    id: "tiktok-200",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "200",
+    price: 2.00
+  },
+  {
+    id: "tiktok-300",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "300",
+    price: 2.50
+  },
+  {
+    id: "tiktok-400",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "400",
+    price: 3.50
+  },
+  {
+    id: "tiktok-500",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "500",
+    price: 4.50
+  },
+  {
+    id: "tiktok-600",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "600",
+    price: 5.50
+  },
+  {
+    id: "tiktok-700",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "700",
+    price: 6.50
+  },
+  {
+    id: "tiktok-800",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "800",
+    price: 7.50
+  },
+  {
+    id: "tiktok-900",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "900",
+    price: 8.50
+  },
+  {
+    id: "tiktok-1k",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "1K",
+    price: 9.50
+  },
+  {
+    id: "tiktok-2k",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "2K",
+    price: 10.50
+  },
+  {
+    id: "tiktok-3k",
+    name: "Curtidas + visualizações TikTok",
+    category: "tiktok",
+    quantity: "3K",
+    price: 11.50
+  },
+
+  // INSTAGRAM: CURTIDAS EM POST
+  {
+    id: "instagram-100",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "100",
+    price: 1.50
+  },
+  {
+    id: "instagram-200",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "200",
+    price: 2.00
+  },
+  {
+    id: "instagram-300",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "300",
+    price: 3.00
+  },
+  {
+    id: "instagram-400",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "400",
+    price: 4.00
+  },
+  {
+    id: "instagram-500",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "500",
+    price: 5.00
+  },
+  {
+    id: "instagram-600",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "600",
+    price: 6.00
+  },
+  {
+    id: "instagram-700",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "700",
+    price: 7.00
+  },
+  {
+    id: "instagram-800",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "800",
+    price: 8.50
+  },
+  {
+    id: "instagram-900",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "900",
+    price: 9.50
+  },
+  {
+    id: "instagram-1k",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "1K",
+    price: 12.00
+  },
+  {
+    id: "instagram-2k",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "2K",
+    price: 14.00
+  },
+  {
+    id: "instagram-3k",
+    name: "Curtidas em post Instagram",
+    category: "instagram",
+    quantity: "3K",
+    price: 16.00
+  },
+
   // NÚMEROS FAKE
 
   {
@@ -301,21 +482,7 @@ const products = [
     price: 6.00
   },
 
-  {
-    id: "fake-afeganistao",
-    name: "🇦🇫 Afeganistão",
-    category: "fake-number",
-    quantity: "Número Fake",
-    price: 8.50
-  },
 
-  {
-    id: "fake-angola",
-    name: "🇦🇴 Angola",
-    category: "fake-number",
-    quantity: "Número Fake",
-    price: 8.50
-  },
 
   {
     id: "fake-filipinas",
@@ -333,61 +500,19 @@ const products = [
     price: 9.50
   },
 
-  {
-    id: "fake-ucrania",
-    name: "🇺🇦 Ucrânia",
-    category: "fake-number",
-    quantity: "Número Fake",
-    price: 10.50
-  },
 
-  {
-    id: "fake-canada",
-    name: "🇨🇦 Canadá",
-    category: "fake-number",
-    quantity: "Número Fake",
-    price: 11.50
-  },
 
-  {
-    id: "fake-argentina",
-    name: "🇦🇷 Argentina",
-    category: "fake-number",
-    quantity: "Número Fake",
-    price: 19.50
-  },
 
   {
     id: "fake-brasil",
     name: "🇧🇷 Brasil",
     category: "fake-number",
     quantity: "Número Fake",
-    price: 28.50
+    price: 27.50
   },
 
-  {
-    id: "fake-japao",
-    name: "🇯🇵 Japão",
-    category: "fake-number",
-    quantity: "Número Fake",
-    price: 28.50
-  },
 
-  {
-    id: "fake-portugal",
-    name: "🇵🇹 Portugal",
-    category: "fake-number",
-    quantity: "Número Fake",
-    price: 29.00
-  },
 
-  {
-    id: "fake-alemanha",
-    name: "🇩🇪 Alemanha",
-    category: "fake-number",
-    quantity: "Número Fake",
-    price: 30.00
-  },
 
   {
     id: "fake-china",

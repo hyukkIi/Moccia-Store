@@ -27,11 +27,18 @@ const extraProducts =
 const fakeNumberProducts =
   document.getElementById("fake-number-products");
 
+const tiktokProducts =
+  document.getElementById("tiktok-products");
+
+const instagramProducts =
+  document.getElementById("instagram-products");
+
 const cartProducts = [
   "Painel de Números Fake",
   "Painel de Seguidores",
   "Fornecedor de Streaming no DC",
-  "Fornecedor de Robux no DC"
+  "Fornecedor de Robux no DC",
+  "APK Premium para Bot de Divulgação"
 ];
 
 async function loadProducts() {
@@ -59,6 +66,20 @@ async function loadProducts() {
       product => product.category === "fake-number"
     ),
     fakeNumberProducts
+  );
+
+  renderProducts(
+    data.products.filter(
+      product => product.category === "tiktok"
+    ),
+    tiktokProducts
+  );
+
+  renderProducts(
+    data.products.filter(
+      product => product.category === "instagram"
+    ),
+    instagramProducts
   );
 
   renderExtraProducts(data.extraProducts);
@@ -248,6 +269,18 @@ function nextToPayment() {
     .getElementById("payment-price")
     .textContent =
       money(selectedProduct.price);
+}
+
+function updateCartCount() {
+  const cart = JSON.parse(
+    localStorage.getItem("cart") || "[]"
+  );
+
+  const counter = document.getElementById("cart-count");
+
+  if (counter) {
+    counter.textContent = cart.length;
+  }
 }
 
 function addToCart(product) {
@@ -546,7 +579,79 @@ function showCartNotification() {
   );
 }
 
+function showSocialWarning(onContinue) {
+  const oldModal = document.getElementById("social-warning-modal");
+  if (oldModal) oldModal.remove();
+
+  const modal = document.createElement("div");
+  modal.id = "social-warning-modal";
+  modal.className = "modal";
+
+  const box = document.createElement("div");
+  box.className = "modal-box social-warning-box";
+
+  const title = document.createElement("h2");
+  title.textContent = "Aviso importante";
+  box.appendChild(title);
+
+  const content = document.createElement("div");
+  content.className = "social-warning-text";
+
+  const paragraphs = [
+    "Após o pagamento, NÃO faço reembolso, independentemente da situação.",
+    "🌺 Ao comprar, você está ciente de que existe uma chance de 40% a 50% de seus seguidores comprados caírem depois. Não acontece sempre, mas pode acontecer.",
+    "🦩 Você está ciente de que nossa venda é terceirizada. Dependemos do nosso fornecedor para isso.",
+    "🌺 Os seguidores (ou curtidas) começam a cair em cerca de 20 a 40 minutos, com prazo de até 48 horas. Tenha paciência.",
+    "🦩 Não mude o @ da conta durante pelo menos 1 mês."
+  ];
+
+  paragraphs.forEach(function(text) {
+    const p = document.createElement("p");
+    p.textContent = text;
+    content.appendChild(p);
+  });
+
+  box.appendChild(content);
+
+  const actions = document.createElement("div");
+  actions.className = "social-warning-actions";
+
+  const back = document.createElement("button");
+  back.type = "button";
+  back.className = "social-warning-back";
+  back.textContent = "Voltar";
+  back.addEventListener("click", function() { modal.remove(); });
+
+  const proceed = document.createElement("button");
+  proceed.type = "button";
+  proceed.className = "next-button";
+  proceed.textContent = "Li e estou ciente, continuar";
+  proceed.addEventListener("click", function() {
+    modal.remove();
+    onContinue();
+  });
+
+  actions.appendChild(back);
+  actions.appendChild(proceed);
+  box.appendChild(actions);
+  modal.appendChild(box);
+  document.body.appendChild(modal);
+}
+
 async function buyProduct(product) {
+
+  if (product.category === "tiktok" || product.category === "instagram") {
+    showSocialWarning(function() {
+      continueBuyProduct(product);
+    });
+    return;
+  }
+
+  continueBuyProduct(product);
+}
+
+async function continueBuyProduct(product) {
+
 
   if (
     product.name === "Painel de Números Fake" ||
@@ -600,35 +705,39 @@ async function buyProduct(product) {
 }
 
 async function copyPix() {
+  const email = "gojosatorunaomorreu@gmail.com";
 
-  const email =
-    "gojosatorunaomorreu@gmail.com";
+  try {
+    await navigator.clipboard.writeText(email);
 
-  await navigator.clipboard.writeText(email);
+    const oldToast = document.getElementById("pix-toast");
+    if (oldToast) oldToast.remove();
 
-  alert("Chave PIX copiada!");
+    const toast = document.createElement("div");
+    toast.id = "pix-toast";
+    toast.innerHTML = `
+      <span class="pix-toast-icon">✓</span>
+      <span>
+        <strong>Chave Pix copiada!</strong>
+        <small>Prontinha para você colar 🩵</small>
+      </span>
+    `;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add("pix-toast-hide");
+      setTimeout(() => toast.remove(), 300);
+    }, 2500);
+  } catch (error) {
+    alert("Não foi possível copiar a chave Pix.");
+  }
 }
 
 function closeCart() {
-
   document
     .getElementById("cart-modal")
     .classList.add("hidden");
-}
-
-function updateCartCount() {
-
-  const cart =
-    JSON.parse(
-      localStorage.getItem("cart") || "[]"
-    );
-
-  const count =
-    document.getElementById("cart-count");
-
-  if (count) {
-    count.textContent = cart.length;
-  }
 }
 
 function renderCart() {
@@ -740,51 +849,47 @@ function openCart() {
 }
 
 function buyCart() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  const cart =
-    JSON.parse(
-      localStorage.getItem("cart") || "[]"
-    );
+  if (cart.length === 0) return;
 
-  if (cart.length === 0) {
+  if (cart.some(function(product) {
+    return product.category === "tiktok" || product.category === "instagram";
+  })) {
+    showSocialWarning(function() {
+      processCartPurchase();
+    });
     return;
   }
 
-  const total =
-    cart.reduce(
-      (sum, product) =>
-        sum + Number(product.price),
-      0
-    );
+  processCartPurchase();
+}
+
+function processCartPurchase() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  if (cart.length === 0) return;
+
+  const total = cart.reduce(
+    (sum, product) => sum + Number(product.price),
+    0
+  );
 
   selectedProduct = {
     name: "Compra do carrinho",
     price: total
   };
 
-  document
-    .getElementById("payment-product")
-    .textContent =
-      `${cart.length} produto(s) no carrinho`;
+  document.getElementById("payment-product").textContent =
+    `${cart.length} produto(s) no carrinho`;
 
-  document
-    .getElementById("payment-price")
-    .textContent =
-      money(total);
+  document.getElementById("payment-price").textContent = money(total);
 
   closeCart();
 
-  document
-    .getElementById("payment-modal")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("terms-content")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("payment-content")
-    .classList.add("hidden");
+  document.getElementById("payment-modal").classList.remove("hidden");
+  document.getElementById("terms-content").classList.remove("hidden");
+  document.getElementById("payment-content").classList.add("hidden");
 }
 
 loadProducts();

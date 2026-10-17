@@ -840,8 +840,8 @@ animation: doubleClickFloat 0.40s ease-out forwards;}
 }
 
 /* Primeiras duas fileiras: 4 cards largos por vez */
-.product-section:nth-of-type(1) .product-card,
-.product-section:nth-of-type(2) .product-card {
+.product-section:has(#whatsapp-products) .product-card,
+.product-section:has(#roblox-products) .product-card {
   flex: 0 0 calc((100% - 36px) / 4);
   min-width: 0;
   min-height: 175px;
@@ -849,20 +849,20 @@ animation: doubleClickFloat 0.40s ease-out forwards;}
 }
 
 /* Dá espaço para o conteúdo não ser cortado */
-.product-section:nth-of-type(1) .product-scroll,
-.product-section:nth-of-type(2) .product-scroll {
+.product-section:has(#whatsapp-products) .product-scroll,
+.product-section:has(#roblox-products) .product-scroll {
   min-height: 215px;
   padding-bottom: 25px;
 }
 
 /* CORREÇÃO DEFINITIVA DO CORTE DAS DUAS PRIMEIRAS FILEIRAS */
-.product-section:nth-of-type(1),
-.product-section:nth-of-type(2) {
+.product-section:has(#whatsapp-products),
+.product-section:has(#roblox-products) {
   overflow: visible !important;
 }
 
-.product-section:nth-of-type(1) .product-scroll,
-.product-section:nth-of-type(2) .product-scroll {
+.product-section:has(#whatsapp-products) .product-scroll,
+.product-section:has(#roblox-products) .product-scroll {
   overflow-x: auto !important;
   overflow-y: visible !important;
   min-height: 230px !important;
@@ -871,25 +871,23 @@ animation: doubleClickFloat 0.40s ease-out forwards;}
   padding-bottom: 35px !important;
 }
 
-.product-section:nth-of-type(1) .product-card,
-.product-section:nth-of-type(2) .product-card {
+.product-section:has(#whatsapp-products) .product-card,
+.product-section:has(#roblox-products) .product-card {
   min-height: 175px !important;
   height: 175px !important;
   overflow: visible !important;
 }
 
 /* Primeiras duas fileiras: 4 cards largos por vez */
-.product-section:nth-of-type(1) .product-card,
-.product-section:nth-of-type(2) .product-card {
+.product-section:has(#whatsapp-products) .product-card,
+.product-section:has(#roblox-products) .product-card {
   flex: 0 0 calc((100% - 36px) / 4);
   min-width: 0;
   box-sizing: border-box;
 }
 
-}
-
 /* Diminui o símbolo apenas nos produtos de Seguidores no Roblox */
-.product-section:nth-of-type(2) .product-icon {
+.product-section:has(#roblox-products) .product-icon {
   font-size: 5px !important;
 }
 
@@ -1204,4 +1202,111 @@ body.notification-open {
   box-shadow:
     0 2px 0 #6faed0,
     0 4px 8px rgba(60, 130, 170, 0.2);
+}
+
+/* Aviso de compras de curtidas do TikTok e Instagram */
+.social-warning-box {
+  width: min(520px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.social-warning-text {
+  text-align: left;
+  max-height: 48vh;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+  color: #43566b;
+  font-size: 14px;
+}
+
+.social-warning-text p {
+  margin: 0 0 16px;
+}
+
+.social-warning-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.social-warning-back {
+  border: 1px solid #d6e1ea;
+  background: #f5f8fb;
+  color: #334155;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* Notificação personalizada da chave Pix */
+#pix-toast {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 15px 20px;
+  border: 1px solid #c5e5ff;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #eff8ff, #dff0ff);
+  color: #315b82;
+  box-shadow: 0 8px 28px rgba(102, 170, 220, 0.25);
+  font-family: inherit;
+  animation: pixToastIn 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#pix-toast .pix-toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #c9e9ff;
+  color: #286ba0;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+#pix-toast strong,
+#pix-toast small {
+  display: block;
+}
+
+#pix-toast strong {
+  font-size: 14px;
+}
+
+#pix-toast small {
+  margin-top: 3px;
+  color: #6485a5;
+  font-size: 12px;
+}
+
+#pix-toast.pix-toast-hide {
+  opacity: 0;
+  transform: translate(-50%, -10px);
+}
+
+@keyframes pixToastIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
