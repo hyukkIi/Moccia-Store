@@ -11,6 +11,11 @@
 
   <title>Moccia Store</title>
 
+  <link rel="icon" type="image/jpeg" href="/icone-moccia.jpg">
+  <link rel="apple-touch-icon" href="/icone-moccia.jpg">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#dceeff">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -68,7 +73,7 @@
 
       <div class="section-title">
         <span>🍰</span>
-        <h2>Seguidores no WhatsApp</h2>
+        <h2>Seguidores mundial para WhatsApp</h2>
       </div>
 
       <div
@@ -81,19 +86,62 @@
 
     <section class="product-section">
       <div class="section-title">
-        <span>🎵</span>
-        <h2>TikTok: Curtidas + visualizações em vídeos</h2>
+        <span>🇧🇷</span>
+        <h2>Seguidores brasileiros para WhatsApp</h2>
       </div>
+      <div id="whatsapp-br-products" class="product-scroll"></div>
+    </section>
+
+<!-- CALCULADORA DE VOTOS MOCCIA -->
+    <section class="votes-calculator" id="calculadora-votos">
+      <div class="votes-heading">
+        <span>🗳️</span>
+        <h2>Calculadora de votos</h2>
+      </div>
+      <p class="votes-description">Coloque a quantidade desejada para ver o valor.</p>
+      <p class="votes-hint">Quantidades de 10 em 10. Exemplo: 210, 220, 230, 520, 530, 540.</p>
+
+      <label class="votes-label" for="votes-quantity">Quantidade de votos</label>
+      <input id="votes-quantity" class="votes-input" type="number"
+        min="10" max="1190" step="10" value="10" inputmode="numeric">
+
+      <div class="votes-price-area">
+        <span>Valor total</span>
+        <strong id="votes-price">R$ 0,80</strong>
+      </div>
+
+      <p class="votes-error" id="votes-error" role="status"></p>
+      <button type="button" class="votes-buy-button" id="votes-buy">Comprar</button>
+
+      <div class="votes-payment" id="votes-payment" hidden>
+        <p class="votes-payment-title">Pague pelo Pix</p>
+        <div class="votes-pix-row">
+          <code id="votes-pix-key">gojosatorunaomorreu@gmail.com</code>
+          <button type="button" id="votes-copy-pix" class="votes-copy-button">Copiar Pix</button>
+        </div>
+        <p class="votes-payment-note">Após o pagamento, envie o comprovante para receber seu produto.</p>
+        <a class="votes-receive-link"
+          href="https://wa.me/5593991595706?text=%3E%20manda%20junto%20com%20seu%20comprovante.%0A%0A%E1%8D%9D%D6%9F%E2%95%AD%E2%94%81%EA%AF%AD%E2%83%9C%E2%94%80%20%F0%9F%84%B5i%F0%9D%97%B0%CD%9Fh%CE%B1%D6%9F%E1%8D%9D%E3%85%A4%F0%9F%84%B3e%20%20%20%F0%9D%97%96%CD%9F%F0%96%A6%B9mpr%CE%B1%D6%9F%E1%8D%9D%20%20%E2%94%81%E2%B5%BF%CD%9E%E2%94%80%E2%95%AE%20%E1%8D%9D%D6%9F%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%AB%99%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Quan%F0%91%80%B1o%20v%F0%91%84%9D%EA%AF%ADc%C3%AA%20pagou%20%3F%0A%3E%20Apague%20aqui%20e%20escreva%20%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%8C%BC%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Qu%F0%9D%95%96%20quantidad%F0%9D%95%96%20d%F0%9D%95%96%20v%F0%91%84%9D%EA%AF%ADtos%20v%F0%91%84%9D%EA%AF%ADc%C3%AA%20c%F0%91%84%9D%EA%AF%ADmprou%3F%0A%3E%20Apague%20aqui%20e%20escreva"
+          target="_blank" rel="noopener noreferrer">receber produto</a>
+        <p class="votes-copy-status" id="votes-copy-status" role="status"></p>
+      </div>
+    </section>
+
+
+
+
+
+
+
+    <section class="product-section">
       <div id="tiktok-products" class="product-scroll"></div>
     </section>
 
     <section class="product-section">
-      <div class="section-title">
-        <span>📸</span>
-        <h2>Instagram: Curtidas em post</h2>
-      </div>
       <div id="instagram-products" class="product-scroll"></div>
     </section>
+
+
 
     <section class="product-section">
 
@@ -170,6 +218,10 @@
     </p>
 
     <p>
+      💦 ݂ ` ᤺ ݁ ⵂ ݁ ㅤOs seguidores chegam de 3/20 minutos, varia conforme o tamanho da quantidade comprada.
+    </p>
+
+    <p>
       ፝֟💦 ݂ ` ᤺ ݁ ⵂ ݁ ㅤAo comprar aqui, você entende que nosso serviço é terceirizado, então podem acontecer problemas que acabam fugindo do nosso controle.
     </p>
 
@@ -225,16 +277,32 @@
 
   </div>
 
-  <p class="payment-info">
-    Após fazer o pagamento, envie o comprovante para:
+  <p class="payment-info hidden" id="extra-receive-note">
+    depois de pagar, clique abaixo para enviar o comprovante e receber o produto
   </p>
 
   <a
-    class="whatsapp-payment"
-    href="https://wa.me/559391595706"
+    class="whatsapp-payment hidden"
+    id="extra-receive-link"
+    href="https://wa.me/639306838613?text=%3E%20manda%20junto%20com%20seu%20comprovante.%0A%0A%0A%E1%8D%9D%D6%9F%E2%95%AD%E2%94%81%EA%AF%AD%E2%83%9C%E2%94%80%20%F0%9F%84%B5i%F0%9D%97%B0%CD%9Fh%CE%B1%D6%9F%E1%8D%9D%E3%85%A4%F0%9F%84%B3e%20%20%20%F0%9D%97%96%CD%9F%F0%96%A6%B9mpr%CE%B1%D6%9F%E1%8D%9D%20%20%E2%94%81%E2%B5%BF%CD%9E%E2%94%80%E2%95%AE%20%E1%8D%9D%D6%9F%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%AB%99%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Quanto%20voc%C3%AA%20pagou%20%3F%0A%0A%3E%20Apague%20aqui%20e%20escreva%0A%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%8C%BC%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20O%20que%20voc%C3%AA%20comprou%20%3F%0A%0A%3E%20Apague%20aqui%20e%20escreva"
     target="_blank"
+    rel="noopener noreferrer"
   >
-    📱 93 91595-5706
+    📦 receber produto
+  </a>
+
+  <p class="payment-info" id="followers-receive-note">
+    depois de pagar, clique abaixo para enviar o comprovante e receber o produto
+  </p>
+
+  <a
+    class="whatsapp-payment hidden"
+    id="followers-receive-link"
+    href="https://wa.me/639306838613?text=%3E%20manda%20junto%20com%20seu%20comprovante.%0A%0A%E1%8D%9D%D6%9F%E2%95%AD%E2%94%81%EA%AF%AD%E2%83%9C%E2%94%80%20%F0%9F%84%B5i%F0%9D%97%B0%CD%9Fh%CE%B1%D6%9F%E1%8D%9D%E3%85%A4%F0%9F%84%B3e%20%20%20%F0%9D%97%96%CD%9F%F0%96%A6%B9mpr%CE%B1%D6%9F%E1%8D%9D%20%20%E2%94%81%E2%B5%BF%CD%9E%E2%94%80%E2%95%AE%20%E1%8D%9D%D6%9F%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%AB%99%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Quanto%20voc%C3%AA%20pagou%20%3F%0A%3E%20Apague%20aqui%20e%20escreva%C2%BB%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%8C%BC%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Que%20quantidade%20de%20seguidores%20voc%C3%AA%20comprou%20%3F%0A%3E%20Apague%20aqui%20e%20escreva%C2%BB%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%AB%99%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Brasileiro%20ou%20Mundial%20%3F%0A%3E%20Apague%20aqui%20e%20escreva%C2%BB"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    📦 receber produto
   </a>
 
 </div>
@@ -288,6 +356,69 @@
     </div>
 
   </div>
+
+
+<section class="reviews-section" id="reviews-section">
+  <div class="reviews-heading">
+    <span>🏮</span>
+    <h2>Avaliações da Moccia Store</h2>
+  </div>
+
+  <p class="reviews-intro">
+    Sua opinião ajuda outras pessoas a conhecerem a loja. 💙
+  </p>
+
+  <form id="review-form" class="review-form">
+    <h3>⏜݄͡ㅤׄ˖ㅤ╭━꯭⃜─ㅤׅAvaliaçãoㅤ݁ㅤ━⵿͞─╮ㅤ˖ׄㅤ݄͡⏜</h3>
+
+    <label for="review-nickname">Seu apelido</label>
+    <input id="review-nickname" name="nickname" type="text"
+      minlength="2" maxlength="30" required
+      placeholder="Como quer aparecer na avaliação?">
+
+    <label for="review-site">🏮 O que achou do site?</label>
+    <textarea id="review-site" name="siteAnswer" maxlength="500"
+      required placeholder="Apague aqui e escreva"></textarea>
+
+    <label for="review-organization">🪭 O que achou da organização?</label>
+    <textarea id="review-organization" name="organizationAnswer"
+      maxlength="500" required placeholder="Apague aqui e escreva"></textarea>
+
+    <label for="review-prices">🪭 O que achou dos preços?</label>
+    <textarea id="review-prices" name="pricesAnswer" maxlength="500"
+      required placeholder="Apague aqui e escreva"></textarea>
+
+    <label for="review-reliable">🏮 Confiável?</label>
+    <textarea id="review-reliable" name="reliableAnswer" maxlength="500"
+      required placeholder="Apague aqui e escreva"></textarea>
+
+    <fieldset class="review-rating">
+      <legend>Nota geral</legend>
+      <div class="review-stars">
+        <label><input type="radio" name="rating" value="1" required><span>★</span></label>
+        <label><input type="radio" name="rating" value="2"><span>★</span></label>
+        <label><input type="radio" name="rating" value="3"><span>★</span></label>
+        <label><input type="radio" name="rating" value="4"><span>★</span></label>
+        <label><input type="radio" name="rating" value="5"><span>★</span></label>
+      </div>
+    </fieldset>
+
+    <p id="review-status" class="review-status" role="status"></p>
+    <button id="review-submit" class="review-submit" type="submit">
+      Publicar avaliação
+    </button>
+  </form>
+
+  <div class="reviews-list-heading">
+    <h3>💌 O que os clientes dizem</h3>
+    <button type="button" id="review-edit" class="review-edit" hidden>
+      Editar minha avaliação
+    </button>
+  </div>
+
+  <p id="reviews-loading" class="reviews-loading">Carregando avaliações...</p>
+  <div id="reviews-list" class="reviews-list"></div>
+</section>
 
 <!-- PAINEL DE AVALIAÇÕES -->
 
