@@ -25,6 +25,24 @@ pool.query(`
   console.error("Erro ao criar tabela de visitas:", err);
 });
 
+
+const reviewsTableReady = pool.query(`
+  CREATE TABLE IF NOT EXISTS store_reviews (
+    id SERIAL PRIMARY KEY,
+    visitor_token TEXT NOT NULL UNIQUE,
+    nickname VARCHAR(30) NOT NULL,
+    site_answer VARCHAR(500) NOT NULL,
+    organization_answer VARCHAR(500) NOT NULL,
+    prices_answer VARCHAR(500) NOT NULL,
+    reliable_answer VARCHAR(500) NOT NULL,
+    rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )
+`).catch(err => {
+  console.error("Avaliações indisponíveis: PostgreSQL não conectado.");
+});
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -201,6 +219,97 @@ const products = [
     price: 31.00
   },
 
+
+  // SEGUIDORES BRASILEIROS PARA WHATSAPP
+
+  {
+    id: "whatsapp-br-100",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "100",
+    price: 4.00
+  },
+
+  {
+    id: "whatsapp-br-200",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "200",
+    price: 6.00
+  },
+
+  {
+    id: "whatsapp-br-300",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "300",
+    price: 7.00
+  },
+
+  {
+    id: "whatsapp-br-400",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "400",
+    price: 9.50
+  },
+
+  {
+    id: "whatsapp-br-500",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "500",
+    price: 13.00
+  },
+
+  {
+    id: "whatsapp-br-600",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "600",
+    price: 16.00
+  },
+
+  {
+    id: "whatsapp-br-700",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "700",
+    price: 17.50
+  },
+
+  {
+    id: "whatsapp-br-800",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "800",
+    price: 19.00
+  },
+
+  {
+    id: "whatsapp-br-900",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "900",
+    price: 20.00
+  },
+
+  {
+    id: "whatsapp-br-1k",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "1K",
+    price: 25.00
+  },
+
+  {
+    id: "whatsapp-br-2k",
+    name: "Seguidores Brasileiros WhatsApp",
+    category: "whatsapp-br",
+    quantity: "2K",
+    price: 45.00
+  },
+
   // ROBLOX
 
   {
@@ -297,179 +406,6 @@ const products = [
     category: "roblox",
     quantity: "1K",
     price: 13.00
-  },
-
-
-  // TIKTOK: CURTIDAS + VISUALIZAÇÕES
-  {
-    id: "tiktok-100",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "100",
-    price: 1.50
-  },
-  {
-    id: "tiktok-200",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "200",
-    price: 2.00
-  },
-  {
-    id: "tiktok-300",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "300",
-    price: 2.50
-  },
-  {
-    id: "tiktok-400",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "400",
-    price: 3.50
-  },
-  {
-    id: "tiktok-500",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "500",
-    price: 4.50
-  },
-  {
-    id: "tiktok-600",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "600",
-    price: 5.50
-  },
-  {
-    id: "tiktok-700",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "700",
-    price: 6.50
-  },
-  {
-    id: "tiktok-800",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "800",
-    price: 7.50
-  },
-  {
-    id: "tiktok-900",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "900",
-    price: 8.50
-  },
-  {
-    id: "tiktok-1k",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "1K",
-    price: 9.50
-  },
-  {
-    id: "tiktok-2k",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "2K",
-    price: 10.50
-  },
-  {
-    id: "tiktok-3k",
-    name: "Curtidas + visualizações TikTok",
-    category: "tiktok",
-    quantity: "3K",
-    price: 11.50
-  },
-
-  // INSTAGRAM: CURTIDAS EM POST
-  {
-    id: "instagram-100",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "100",
-    price: 1.50
-  },
-  {
-    id: "instagram-200",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "200",
-    price: 2.00
-  },
-  {
-    id: "instagram-300",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "300",
-    price: 3.00
-  },
-  {
-    id: "instagram-400",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "400",
-    price: 4.00
-  },
-  {
-    id: "instagram-500",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "500",
-    price: 5.00
-  },
-  {
-    id: "instagram-600",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "600",
-    price: 6.00
-  },
-  {
-    id: "instagram-700",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "700",
-    price: 7.00
-  },
-  {
-    id: "instagram-800",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "800",
-    price: 8.50
-  },
-  {
-    id: "instagram-900",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "900",
-    price: 9.50
-  },
-  {
-    id: "instagram-1k",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "1K",
-    price: 12.00
-  },
-  {
-    id: "instagram-2k",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "2K",
-    price: 14.00
-  },
-  {
-    id: "instagram-3k",
-    name: "Curtidas em post Instagram",
-    category: "instagram",
-    quantity: "3K",
-    price: 16.00
   },
 
   // NÚMEROS FAKE
@@ -769,6 +705,95 @@ app.get("/admin", async (req, res) => {
 
   }
 
+});
+
+
+/* =========================
+   REVIEWS_API_MOCCIA
+========================= */
+
+app.get("/api/reviews", async (req, res) => {
+  try {
+    await reviewsTableReady;
+    const result = await pool.query(`
+      SELECT id, nickname, site_answer, organization_answer,
+             prices_answer, reliable_answer, rating, created_at, updated_at
+      FROM store_reviews
+      ORDER BY updated_at DESC
+      LIMIT 100
+    `);
+    res.json({ reviews: result.rows });
+  } catch (error) {
+    console.error("Erro ao listar avaliações:", error);
+    res.status(500).json({ error: "Não foi possível carregar as avaliações." });
+  }
+});
+
+app.post("/api/reviews", async (req, res) => {
+  try {
+    await reviewsTableReady;
+
+    const {
+      visitorToken, nickname, siteAnswer, organizationAnswer,
+      pricesAnswer, reliableAnswer, rating
+    } = req.body || {};
+
+    const fields = [
+      [nickname, 2, 30],
+      [siteAnswer, 1, 500],
+      [organizationAnswer, 1, 500],
+      [pricesAnswer, 1, 500],
+      [reliableAnswer, 1, 500]
+    ];
+
+    if (
+      typeof visitorToken !== "string" ||
+      visitorToken.length < 20 ||
+      visitorToken.length > 100 ||
+      fields.some(([value, min, max]) =>
+        typeof value !== "string" ||
+        value.trim().length < min ||
+        value.trim().length > max
+      ) ||
+      !Number.isInteger(Number(rating)) ||
+      Number(rating) < 1 ||
+      Number(rating) > 5
+    ) {
+      return res.status(400).json({
+        error: "Confira o apelido, as quatro respostas e a nota de 1 a 5."
+      });
+    }
+
+    const result = await pool.query(`
+      INSERT INTO store_reviews
+        (visitor_token, nickname, site_answer, organization_answer,
+         prices_answer, reliable_answer, rating)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      ON CONFLICT (visitor_token) DO UPDATE SET
+        nickname = EXCLUDED.nickname,
+        site_answer = EXCLUDED.site_answer,
+        organization_answer = EXCLUDED.organization_answer,
+        prices_answer = EXCLUDED.prices_answer,
+        reliable_answer = EXCLUDED.reliable_answer,
+        rating = EXCLUDED.rating,
+        updated_at = CURRENT_TIMESTAMP
+      RETURNING id, nickname, site_answer, organization_answer,
+                prices_answer, reliable_answer, rating, created_at, updated_at
+    `, [
+      visitorToken,
+      nickname.trim(),
+      siteAnswer.trim(),
+      organizationAnswer.trim(),
+      pricesAnswer.trim(),
+      reliableAnswer.trim(),
+      Number(rating)
+    ]);
+
+    res.json({ success: true, review: result.rows[0] });
+  } catch (error) {
+    console.error("Erro ao salvar avaliação:", error);
+    res.status(500).json({ error: "Não foi possível salvar sua avaliação." });
+  }
 });
 
 /* =========================

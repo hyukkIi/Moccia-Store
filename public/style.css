@@ -347,8 +347,8 @@ body {
 
 footer {
   text-align: center;
-  padding: 50px 0 20px;
-
+  padding: 30px 0 20px;
+  margin-bottom: 0;
   font-weight: 800;
 }
 
@@ -1309,4 +1309,696 @@ body.notification-open {
     opacity: 1;
     transform: translate(-50%, 0);
   }
+}
+
+
+/* CALCULADORA DE VOTOS MOCCIA */
+
+
+.votes-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.votes-heading span {
+  font-size: 28px;
+}
+
+.votes-heading h2 {
+  color: #4389b6;
+  font-size: clamp(20px, 4vw, 27px);
+  font-weight: 900;
+}
+
+.votes-description {
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+
+.votes-hint {
+  color: #607f91;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.votes-label {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.votes-input {
+  width: 100%;
+  max-width: 360px;
+  padding: 13px 15px;
+  border: 2px solid #c6eaff;
+  border-radius: 14px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+  outline: none;
+}
+
+.votes-input:focus {
+  border-color: var(--blue-dark);
+}
+
+.votes-price-area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 18px 0;
+  padding: 15px;
+  border-radius: 16px;
+  background: #eaf8ff;
+}
+
+.votes-price-area span {
+  font-weight: 800;
+}
+
+.votes-price-area strong {
+  color: #287db1;
+  font-size: 25px;
+}
+
+.votes-error,
+.votes-copy-status {
+  color: #b34465;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+.votes-buy-button,
+.votes-copy-button {
+  border: 0;
+  border-radius: 13px;
+  padding: 12px 18px;
+  background: #559dcc;
+  color: white;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.votes-buy-button {
+  width: 100%;
+  max-width: 360px;
+}
+
+.votes-buy-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.votes-payment {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 17px;
+  background: #f0faff;
+  border: 1px solid #ccecff;
+}
+
+.votes-payment[hidden] {
+  display: none;
+}
+
+.votes-payment-title {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.votes-pix-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.votes-pix-row code {
+  overflow-wrap: anywhere;
+  color: #315064;
+  font-size: 14px;
+}
+
+.votes-payment-note {
+  margin: 14px 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.votes-receive-link {
+  display: inline-block;
+  color: #247eae;
+  font-weight: 900;
+  text-decoration: underline;
+  padding: 5px 0;
+}
+
+@media (max-width: 480px) {
+
+
+  .votes-pix-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .votes-copy-button {
+    width: 100%;
+  }
+}
+
+/* Calculadora de votos compacta */
+
+
+.votes-heading {
+  gap: 7px;
+  margin-bottom: 6px;
+}
+
+.votes-heading span {
+  font-size: 21px;
+}
+
+.votes-heading h2 {
+  font-size: 18px;
+}
+
+.votes-description {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.votes-hint {
+  font-size: 11px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.votes-label {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.votes-input {
+  max-width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.votes-price-area {
+  gap: 8px;
+  margin: 12px 0;
+  padding: 10px;
+  border-radius: 11px;
+}
+
+.votes-price-area span {
+  font-size: 13px;
+}
+
+.votes-price-area strong {
+  font-size: 20px;
+}
+
+.votes-buy-button {
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.votes-payment {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+@media (max-width: 480px) {
+
+}
+
+/* Reduz os espaços vazios entre as categorias */
+.product-section {
+  margin-top: 12px;
+}
+
+.product-section .section-title {
+  margin-bottom: 8px;
+}
+
+/* Deixa a área dos produtos ocupar somente o espaço necessário */
+.product-section .product-scroll {
+  min-height: 0;
+  height: auto;
+}
+
+/* Remove alturas fixas excessivas do WhatsApp e Roblox */
+.product-section:has(#whatsapp-products) .product-scroll,
+.product-section:has(#roblox-products) .product-scroll {
+  height: auto !important;
+  min-height: 0 !important;
+  padding-top: 5px !important;
+  padding-bottom: 15px !important;
+}
+
+
+/* ESTILOS AVALIACOES MOCCIA */
+.reviews-section {
+  margin: 24px 0;
+  padding: 18px;
+  border: 1px solid rgba(151, 198, 255, .55);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #f8fcff, #eaf5ff);
+  box-shadow: 0 8px 24px rgba(103, 163, 220, .12);
+  color: #35516e;
+}
+
+.reviews-heading,
+.reviews-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.reviews-heading {
+  justify-content: flex-start;
+}
+
+.reviews-heading span {
+  font-size: 25px;
+}
+
+.reviews-heading h2,
+.reviews-list-heading h3 {
+  margin: 0;
+  color: #477db7;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.reviews-intro,
+.reviews-loading {
+  color: #66819c;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 16px;
+  padding: 15px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .8);
+  border: 1px solid #d8eaff;
+}
+
+.review-form h3 {
+  margin: 0 0 8px;
+  color: #5889bd;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.review-form > label {
+  color: #466b92;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.review-form input[type="text"],
+.review-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d0e4fa;
+  border-radius: 11px;
+  background: #fbfdff;
+  color: #35516e;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.review-form textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+.review-form input[type="text"]:focus,
+.review-form textarea:focus {
+  border-color: #8dbdf0;
+  box-shadow: 0 0 0 3px rgba(141, 189, 240, .18);
+}
+
+.review-rating {
+  margin: 5px 0;
+  padding: 8px 0;
+  border: 0;
+}
+
+.review-rating legend {
+  margin-bottom: 6px;
+  color: #466b92;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.review-stars {
+  display: flex;
+  gap: 8px;
+}
+
+.review-stars label {
+  cursor: pointer;
+}
+
+.review-stars input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.review-stars span {
+  color: #c4d2e1;
+  font-size: 31px;
+  transition: color .15s ease, transform .15s ease;
+}
+
+.review-stars label:has(input:checked) span,
+.review-stars label:has(input:checked) ~ label span {
+  color: #c4d2e1;
+}
+
+.review-stars label:has(input:checked) span {
+  color: #ffbd59;
+}
+
+.review-stars label:has(input:focus-visible) span {
+  outline: 2px solid #75a9e2;
+  border-radius: 5px;
+}
+
+.review-submit,
+.review-edit {
+  padding: 11px 15px;
+  border: 0;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #a9d5ff, #7fb8f2);
+  color: #244d78;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(94, 156, 220, .16);
+}
+
+.review-submit:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.review-edit {
+  padding: 8px 11px;
+  font-size: 12px;
+}
+
+.review-status {
+  margin: 2px 0;
+  color: #477db7;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.reviews-list-heading {
+  margin-top: 22px;
+}
+
+.reviews-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.review-card {
+  padding: 14px;
+  border: 1px solid #d9eaff;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .9);
+  overflow-wrap: anywhere;
+}
+
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.review-card h4 {
+  margin: 0;
+  color: #477db7;
+  font-size: 15px;
+}
+
+.review-card-rating {
+  color: #f0ad40;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+
+.review-card-date {
+  margin: 4px 0 10px;
+  color: #8a9db1;
+  font-size: 11px;
+}
+
+.review-card p {
+  margin: 8px 0;
+  color: #4f6680;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.review-card p strong {
+  color: #477db7;
+}
+
+.review-empty {
+  padding: 15px;
+  border: 1px dashed #c7def5;
+  border-radius: 13px;
+  color: #7890a8;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .reviews-section {
+    padding: 12px;
+  }
+
+  .review-form {
+    padding: 11px;
+  }
+
+  .reviews-heading h2 {
+    font-size: 17px;
+  }
+}
+
+/* Ajustes finais da calculadora */
+#calculadora-votos {
+  display: block;
+  width: calc(100% - 24px);
+  max-width: 520px;
+  min-width: 0;
+  margin: 24px auto;
+  padding: 18px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+#calculadora-votos,
+#calculadora-votos * {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+#calculadora-votos .votes-heading,
+#calculadora-votos .votes-description,
+#calculadora-votos .votes-hint,
+#calculadora-votos .votes-label,
+#calculadora-votos .votes-price-area,
+#calculadora-votos .votes-error,
+#calculadora-votos .votes-payment {
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+#calculadora-votos input,
+#calculadora-votos button {
+  max-width: 100%;
+}
+
+#calculadora-votos .votes-pix-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#calculadora-votos .votes-pix-row code {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+#calculadora-votos .votes-receive-link {
+  overflow-wrap: anywhere;
+}
+
+/* Produtos em uma única fileira horizontal */
+.product-section .product-scroll {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: auto;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.product-section .product-card {
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  #calculadora-votos {
+    padding: 14px;
+  }
+
+  .product-section .product-scroll {
+    gap: 10px;
+  }
+}
+
+/* Calculadora no estilo dos cards da Moccia Store */
+#calculadora-votos {
+  display: block;
+  width: calc(100% - 24px);
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 20px;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid rgba(117, 171, 224, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(100, 150, 210, 0.16);
+  box-sizing: border-box;
+}
+
+#calculadora-votos > * {
+  max-width: 100%;
+}
+
+#calculadora-votos .votes-heading {
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  #calculadora-votos {
+    width: calc(100% - 24px);
+    padding: 16px;
+    border-radius: 18px;
+  }
+}
+
+/* Oculta somente os títulos antigos de TikTok e Instagram */
+.product-section:has(#tiktok-products) .section-title,
+.product-section:has(#instagram-products) .section-title {
+  display: none !important;
+}
+
+
+/* Correção do espaçamento dos links de recebimento */
+#extra-receive-link:not(.hidden),
+#followers-receive-link:not(.hidden) {
+  display: block;
+  position: static;
+  clear: both;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0;
+  line-height: 1.5;
+  white-space: normal;
+}
+
+#extra-receive-note,
+#followers-receive-note {
+  display: block;
+  position: static;
+  clear: both;
+  margin: 12px 0;
+  line-height: 1.6;
+}
+
+
+/* Recebimento: instrução acima do link, sem alterar botões de compra */
+#extra-receive-note:not(.hidden),
+#followers-receive-note:not(.hidden) {
+  display: block;
+  position: static;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0 8px;
+  line-height: 1.6;
+}
+
+#extra-receive-link:not(.hidden),
+#followers-receive-link:not(.hidden) {
+  display: block;
+  position: static;
+  clear: both;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 14px;
+  line-height: 1.5;
+  white-space: normal;
+}
+
+
+/* Recebimento: instrução acima do link, sem alterar botões de compra */
+#extra-receive-note:not(.hidden),
+#followers-receive-note:not(.hidden) {
+  display: block;
+  position: static;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0 8px;
+  line-height: 1.6;
+}
+
+#extra-receive-link:not(.hidden),
+#followers-receive-link:not(.hidden) {
+  display: block;
+  position: static;
+  clear: both;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 14px;
+  line-height: 1.5;
+  white-space: normal;
 }

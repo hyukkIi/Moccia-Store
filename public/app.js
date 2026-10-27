@@ -1,3 +1,47 @@
+
+function showReceiveInstructions(product = selectedProduct) {
+  const isWhatsapp = !!product && (
+    product.category === "whatsapp" ||
+    product.category === "whatsapp-br"
+  );
+
+  const noteIds = [
+    "extra-receive-note",
+    "followers-receive-note"
+  ];
+
+  const linkIds = [
+    "extra-receive-link",
+    "followers-receive-link"
+  ];
+
+  noteIds.forEach(function(id) {
+    const note = document.getElementById(id);
+    if (note) {
+      note.textContent =
+        "Depois de pagar, clique abaixo para enviar o comprovante e receber o produto";
+      note.classList.toggle(
+        "hidden",
+        id === "followers-receive-note" ? !isWhatsapp : isWhatsapp
+      );
+      note.style.display = (
+        id === "followers-receive-note" ? isWhatsapp : !isWhatsapp
+      ) ? "block" : "none";
+    }
+  });
+
+  linkIds.forEach(function(id) {
+    const link = document.getElementById(id);
+    if (link) {
+      const show = (
+        id === "followers-receive-link" ? isWhatsapp : !isWhatsapp
+      );
+      link.classList.toggle("hidden", !show);
+      link.style.display = show ? "block" : "none";
+    }
+  });
+}
+
 const visitorId = localStorage.getItem("moccia_visitor_id") ||
   (() => {
     const id = crypto.randomUUID();
@@ -17,6 +61,9 @@ let selectedProduct = null;
 
 const whatsappProducts =
   document.getElementById("whatsapp-products");
+
+const whatsappBrProducts =
+  document.getElementById("whatsapp-br-products");
 
 const robloxProducts =
   document.getElementById("roblox-products");
@@ -52,6 +99,13 @@ async function loadProducts() {
       product => product.category === "whatsapp"
     ),
     whatsappProducts
+  );
+
+  renderProducts(
+    data.products.filter(
+      product => product.category === "whatsapp-br"
+    ),
+    whatsappBrProducts
   );
 
   renderProducts(
@@ -249,6 +303,8 @@ function closePayment() {
 }
 
 function nextToPayment() {
+  showReceiveInstructions();
+
 
   document
     .getElementById("terms-content")
@@ -257,6 +313,26 @@ function nextToPayment() {
   document
     .getElementById("payment-content")
     .classList.remove("hidden");
+
+  const isWhatsapp =
+    selectedProduct.category === "whatsapp" ||
+    selectedProduct.category === "whatsapp-br";
+
+  const receiveLink = document.getElementById("followers-receive-link");
+  if (receiveLink) {
+    receiveLink.classList.toggle("hidden", !isWhatsapp);
+  }
+
+  const extraReceiveLink = document.getElementById("extra-receive-link");
+  const extraReceiveNote = document.getElementById("extra-receive-note");
+
+  if (extraReceiveLink) {
+    extraReceiveLink.classList.toggle("hidden", isWhatsapp);
+  }
+
+  if (extraReceiveNote) {
+    extraReceiveNote.classList.toggle("hidden", isWhatsapp);
+  }
 
   document
     .getElementById("payment-product")
@@ -358,7 +434,7 @@ function showTutorialChoice(product) {
           </strong>
 
           <span>
-            R$ 10,00
+            R$ ${money(product.price)}
           </span>
         </button>
 
@@ -374,7 +450,7 @@ function showTutorialChoice(product) {
           </strong>
 
           <span>
-            R$ 13,00
+            R$ ${money(product.tutorialPrice)}
           </span>
         </button>
 
@@ -430,7 +506,7 @@ function showTutorialChoiceBuy(product) {
           </strong>
 
           <span>
-            R$ 10,00
+            R$ ${money(product.price)}
           </span>
         </button>
 
@@ -446,7 +522,7 @@ function showTutorialChoiceBuy(product) {
           </strong>
 
           <span>
-            R$ 13,00
+            R$ ${money(product.tutorialPrice)}
           </span>
         </button>
 
@@ -469,7 +545,7 @@ function confirmTutorialChoice(product, withTutorial) {
 
   const selectedProduct = {
     ...product,
-    price: withTutorial ? 13 : 10,
+    price: withTutorial ? product.tutorialPrice : product.price,
     tutorialSelected: withTutorial
   };
 
@@ -502,7 +578,7 @@ function confirmTutorialBuy(product, withTutorial) {
 
   const selectedProduct = {
     ...product,
-    price: withTutorial ? 13 : 10,
+    price: withTutorial ? product.tutorialPrice : product.price,
     tutorialSelected: withTutorial
   };
 
@@ -653,19 +729,46 @@ async function buyProduct(product) {
 async function continueBuyProduct(product) {
 
 
+
   if (
-    product.name === "Painel de Números Fake" ||
-    product.name === "Painel de Seguidores"
+    (product.name === "Painel de Números Fake" ||
+     product.name === "Painel de Seguidores") &&
+    typeof product.tutorialSelected !== "boolean"
   ) {
-
     showTutorialChoiceBuy(product);
-
     return;
   }
 
   selectedProduct = product;
+  showReceiveInstructions(product);
+  showReceiveInstructions(product);
 
-  if (product.category === "whatsapp") {
+  const isWhatsapp =
+    product.category === "whatsapp" ||
+    product.category === "whatsapp-br";
+
+  const extraReceiveLink = document.getElementById("extra-receive-link");
+  const extraReceiveNote = document.getElementById("extra-receive-note");
+  const followersReceiveLink = document.getElementById("followers-receive-link");
+  const followersReceiveNote = document.getElementById("followers-receive-note");
+
+  const showExtraLink = !isWhatsapp;
+  const showFollowersLink = false;
+
+  if (extraReceiveLink) {
+    extraReceiveLink.classList.toggle("hidden", !showExtraLink);
+  }
+  if (extraReceiveNote) {
+    extraReceiveNote.classList.toggle("hidden", !showExtraLink);
+  }
+  if (followersReceiveLink) {
+    followersReceiveLink.classList.toggle("hidden", !showFollowersLink);
+  }
+  if (followersReceiveNote) {
+    followersReceiveNote.classList.toggle("hidden", !showFollowersLink);
+  }
+
+  if (product.category === "whatsapp" || product.category === "whatsapp-br") {
 
     document
       .getElementById("payment-content")
@@ -854,7 +957,8 @@ function buyCart() {
   if (cart.length === 0) return;
 
   if (cart.some(function(product) {
-    return product.category === "tiktok" || product.category === "instagram";
+    return product.category === "tiktok" ||
+           product.category === "instagram";
   })) {
     showSocialWarning(function() {
       processCartPurchase();
@@ -877,8 +981,16 @@ function processCartPurchase() {
 
   selectedProduct = {
     name: "Compra do carrinho",
-    price: total
+    price: total,
+    category: cart.some(product =>
+      product.category === "whatsapp" ||
+      product.category === "whatsapp-br"
+    ) ? "whatsapp" : "cart"
   };
+
+  showReceiveInstructions(selectedProduct);
+
+  showReceiveInstructions(selectedProduct);
 
   document.getElementById("payment-product").textContent =
     `${cart.length} produto(s) no carrinho`;
@@ -887,9 +999,14 @@ function processCartPurchase() {
 
   closeCart();
 
+  const hasWhatsAppFollowers = cart.some(product =>
+    product.category === "whatsapp" ||
+    product.category === "whatsapp-br"
+  );
+
   document.getElementById("payment-modal").classList.remove("hidden");
-  document.getElementById("terms-content").classList.remove("hidden");
-  document.getElementById("payment-content").classList.add("hidden");
+  document.getElementById("terms-content").classList.toggle("hidden", !hasWhatsAppFollowers);
+  document.getElementById("payment-content").classList.toggle("hidden", hasWhatsAppFollowers);
 }
 
 loadProducts();
@@ -1025,3 +1142,306 @@ if (welcomeCharacter) {
 }
 
 // =========================
+
+
+// CALCULADORA DE VOTOS MOCCIA
+(() => {
+  const quantityInput = document.getElementById('votes-quantity');
+  const priceDisplay = document.getElementById('votes-price');
+  const errorDisplay = document.getElementById('votes-error');
+  const buyButton = document.getElementById('votes-buy');
+  const paymentPanel = document.getElementById('votes-payment');
+  const copyButton = document.getElementById('votes-copy-pix');
+  const copyStatus = document.getElementById('votes-copy-status');
+
+  if (!quantityInput || !priceDisplay || !buyButton || !paymentPanel) return;
+
+  const prices = [
+    80,110,140,150,160,180,200,220,250,280,
+    290,300,310,320,330,340,350,360,370,380,
+    390,400,410,420,430,440,450,460,470,480,
+    490,500,510,520,530,540,550,560,570,580,
+    590,600,610,620,630,640,650,660,670,680,
+    690,700,710,720,730,740,750,760,770,780,
+    790,800,810,820,830,840,850,860,870,880,
+    890,900,910,920,930,940,950,960,970,980,
+    990,1000,1010,1020,1030,1040,1050,1060,1070,1080,
+    1090,1100,1110,1120,1130,1140,1150,1160,1170,1180
+  ];
+
+  function getPriceCents(quantity) {
+    const lowerQuantity = Math.floor(quantity / 10) * 10;
+    const upperQuantity = Math.ceil(quantity / 10) * 10;
+
+    const lowerIndex = lowerQuantity / 10 - 1;
+    const upperIndex = upperQuantity / 10 - 1;
+
+    if (quantity % 10 === 0) {
+      return prices[lowerIndex];
+    }
+
+    if (lowerIndex < 0 || upperIndex >= prices.length) {
+      return null;
+    }
+
+    const lowerPrice = prices[lowerIndex];
+    const upperPrice = prices[upperIndex];
+
+    return Math.round(
+      lowerPrice + (upperPrice - lowerPrice) *
+      ((quantity - lowerQuantity) / 10)
+    );
+  }
+
+  function formatPrice(cents) {
+    return 'R$ ' + (cents / 100).toFixed(2).replace('.', ',');
+  }
+
+  function updatePrice() {
+    const quantity = Number(quantityInput.value);
+    const valid = Number.isInteger(quantity) &&
+      quantity >= 10 && quantity <= 5000;
+
+    paymentPanel.hidden = true;
+    copyStatus.textContent = '';
+
+    if (!valid) {
+      errorDisplay.textContent = 'Escolha uma quantidade inteira de 10 a 5.000.';
+      priceDisplay.textContent = '—';
+      buyButton.disabled = true;
+      return false;
+    }
+
+    const price = getPriceCents(quantity);
+
+    if (price === null || price === undefined) {
+      errorDisplay.textContent =
+        'Ainda não há preço cadastrado para essa quantidade.';
+      priceDisplay.textContent = '—';
+      buyButton.disabled = true;
+      return false;
+    }
+
+    errorDisplay.textContent = '';
+    priceDisplay.textContent = formatPrice(price);
+    buyButton.disabled = false;
+    return true;
+  }
+
+  quantityInput.addEventListener('input', updatePrice);
+
+  buyButton.addEventListener('click', () => {
+    if (!updatePrice()) return;
+    paymentPanel.hidden = false;
+    paymentPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  copyButton.addEventListener('click', async () => {
+    const pixKey = 'gojosatorunaomorreu@gmail.com';
+
+    try {
+      await navigator.clipboard.writeText(pixKey);
+      copyStatus.textContent = 'Chave Pix copiada!';
+    } catch {
+      const temp = document.createElement('textarea');
+      temp.value = pixKey;
+      temp.style.position = 'fixed';
+      temp.style.opacity = '0';
+      document.body.appendChild(temp);
+      temp.select();
+      const copied = document.execCommand('copy');
+      temp.remove();
+      copyStatus.textContent = copied
+        ? 'Chave Pix copiada!'
+        : 'Não foi possível copiar. Copie a chave manualmente.';
+    }
+  });
+
+  updatePrice();
+})();
+
+
+// =========================
+// REVIEWS_API_MOCCIA
+// =========================
+(() => {
+  const form = document.getElementById("review-form");
+  const list = document.getElementById("reviews-list");
+  const loading = document.getElementById("reviews-loading");
+  const status = document.getElementById("review-status");
+  const submitButton = document.getElementById("review-submit");
+  const editButton = document.getElementById("review-edit");
+
+  if (!form || !list || !loading || !status || !submitButton) return;
+
+  const fields = {
+    nickname: document.getElementById("review-nickname"),
+    siteAnswer: document.getElementById("review-site"),
+    organizationAnswer: document.getElementById("review-organization"),
+    pricesAnswer: document.getElementById("review-prices"),
+    reliableAnswer: document.getElementById("review-reliable")
+  };
+
+  const tokenKey = "moccia_store_review_token_v1";
+  let visitorToken = null;
+
+  try {
+    visitorToken = localStorage.getItem(tokenKey);
+    if (!visitorToken) {
+      visitorToken = crypto.randomUUID();
+      localStorage.setItem(tokenKey, visitorToken);
+    }
+  } catch {
+    status.textContent =
+      "Seu navegador bloqueou o armazenamento local. Ative-o para publicar e editar avaliações.";
+    submitButton.disabled = true;
+    return;
+  }
+
+  function addText(parent, tag, className, value) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    element.textContent = value == null ? "" : String(value);
+    parent.appendChild(element);
+    return element;
+  }
+
+  function formatDate(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toLocaleDateString("pt-BR");
+  }
+
+  function renderReviews(reviews) {
+    list.replaceChildren();
+
+    if (!reviews.length) {
+      addText(list, "div", "review-empty",
+        "Ainda não há avaliações publicadas. Seja a primeira pessoa a avaliar! 💙");
+      return;
+    }
+
+    for (const review of reviews) {
+      const card = document.createElement("article");
+      card.className = "review-card";
+
+      const header = document.createElement("div");
+      header.className = "review-card-header";
+      addText(header, "h4", "", review.nickname);
+      addText(header, "span", "review-card-rating",
+        "★".repeat(Number(review.rating)) +
+        "☆".repeat(5 - Number(review.rating)));
+
+      card.appendChild(header);
+      addText(card, "div", "review-card-date",
+        "Publicado em " + formatDate(review.created_at));
+
+      const answers = [
+        ["O que achou do site?", review.site_answer],
+        ["Organização", review.organization_answer],
+        ["Preços", review.prices_answer],
+        ["Confiável?", review.reliable_answer]
+      ];
+
+      for (const [label, answer] of answers) {
+        const paragraph = document.createElement("p");
+        const strong = document.createElement("strong");
+        strong.textContent = label + " ";
+        paragraph.appendChild(strong);
+        paragraph.appendChild(document.createTextNode(String(answer || "")));
+        card.appendChild(paragraph);
+      }
+
+      list.appendChild(card);
+    }
+  }
+
+  async function loadReviews() {
+    loading.hidden = false;
+    loading.textContent = "Carregando avaliações...";
+    try {
+      const response = await fetch("/api/reviews");
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Não foi possível carregar as avaliações.");
+      }
+      renderReviews(Array.isArray(data.reviews) ? data.reviews : []);
+      loading.hidden = true;
+    } catch (error) {
+      loading.hidden = false;
+      loading.textContent =
+        error.message || "Não foi possível carregar as avaliações.";
+    }
+  }
+
+  editButton?.addEventListener("click", () => {
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+    fields.nickname.focus();
+    status.textContent = "Edite os campos e publique novamente para atualizar sua avaliação.";
+  });
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    status.textContent = "";
+
+    const ratingInput = form.querySelector('input[name="rating"]:checked');
+    if (!ratingInput) {
+      status.textContent = "Escolha uma nota de 1 a 5 estrelas.";
+      return;
+    }
+
+    const payload = {
+      visitorToken,
+      nickname: fields.nickname.value.trim(),
+      siteAnswer: fields.siteAnswer.value.trim(),
+      organizationAnswer: fields.organizationAnswer.value.trim(),
+      pricesAnswer: fields.pricesAnswer.value.trim(),
+      reliableAnswer: fields.reliableAnswer.value.trim(),
+      rating: Number(ratingInput.value)
+    };
+
+    if (
+      payload.nickname.length < 2 ||
+      payload.nickname.length > 30 ||
+      !payload.siteAnswer ||
+      !payload.organizationAnswer ||
+      !payload.pricesAnswer ||
+      !payload.reliableAnswer
+    ) {
+      status.textContent = "Preencha o apelido e todas as quatro respostas.";
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Publicando...";
+
+    try {
+      const response = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Não foi possível publicar.");
+      }
+
+      status.textContent = "Avaliação publicada com sucesso! 💙";
+      submitButton.textContent = "Atualizar avaliação";
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+      await loadReviews();
+    } catch (error) {
+      status.textContent =
+        error.message || "Erro ao publicar. Tente novamente.";
+    } finally {
+      submitButton.disabled = false;
+      if (submitButton.textContent === "Publicando...") {
+        submitButton.textContent = "Publicar avaliação";
+      }
+    }
+  });
+
+  loadReviews();
+})();
