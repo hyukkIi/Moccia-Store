@@ -417,9 +417,6 @@ const products = [
     quantity: "Número Fake",
     price: 6.00
   },
-
-
-
   {
     id: "fake-filipinas",
     name: "🇵🇭 Filipinas",
@@ -427,7 +424,13 @@ const products = [
     quantity: "Número Fake",
     price: 6.00
   },
-
+  {
+    id: "fake-angola",
+    name: "🇦🇴 Angola",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 8.50
+  },
   {
     id: "fake-marrocos",
     name: "🇲🇦 Marrocos",
@@ -435,21 +438,55 @@ const products = [
     quantity: "Número Fake",
     price: 9.50
   },
-
-
-
-
+  {
+    id: "fake-ucrania",
+    name: "🇺🇦 Ucrânia",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 10.50
+  },
+  {
+    id: "fake-canada",
+    name: "🇨🇦 Canadá",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 11.50
+  },
+  {
+    id: "fake-argentina",
+    name: "🇦🇷 Argentina",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 19.50
+  },
   {
     id: "fake-brasil",
     name: "🇧🇷 Brasil",
     category: "fake-number",
     quantity: "Número Fake",
-    price: 27.50
+    price: 28.00
   },
-
-
-
-
+  {
+    id: "fake-japao",
+    name: "🇯🇵 Japão",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 28.00
+  },
+  {
+    id: "fake-portugal",
+    name: "🇵🇹 Portugal",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 29.00
+  },
+  {
+    id: "fake-alemanha",
+    name: "🇩🇪 Alemanha",
+    category: "fake-number",
+    quantity: "Número Fake",
+    price: 30.00
+  },
   {
     id: "fake-china",
     name: "🇨🇳 China",

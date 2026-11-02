@@ -5,6 +5,11 @@ function showReceiveInstructions(product = selectedProduct) {
     product.category === "whatsapp-br"
   );
 
+  const isFakeNumber = !!product &&
+    product.category === "fake-number";
+
+  const fakeNumberReceiveUrl = "https://wa.me/639306838613?text=manda%20junto%20com%20seu%20comprovante.%0A%0A%E1%8D%9D%D6%9F%E2%95%AD%E2%94%81%EA%AF%AD%E2%83%9C%E2%94%80%20%F0%9F%84%B5i%F0%9D%97%B0%CD%9Fh%CE%B1%D6%9F%E1%8D%9D%E3%85%A4%F0%9F%84%B3e%20%20%20%F0%9D%97%96%CD%9F%F0%96%A6%B9mpr%CE%B1%D6%9F%E1%8D%9D%20%20%E2%94%81%E2%B5%BF%CD%9E%E2%94%80%E2%95%AE%20%E1%8D%9D%D6%9F%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%AB%99%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20N%C3%BAmero%20de%20que%20pa%C3%ADs%20%3F%0A%3E%20Apague%20aqui%20e%20escreva%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%8C%BC%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Quanto%20voc%C3%AA%20pagou%20%3F%0A%3E%20Apague%20aqui%20e%20escreva%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%AB%99%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Est%C3%A1%20ciente%20dos%20termos%20e%20de%20que%20n%C3%A3o%20fazemos%20reembolso%20%3F%0A%3E%20Apague%20aqui%20e%20escreva";
+
   const noteIds = [
     "extra-receive-note",
     "followers-receive-note"
@@ -15,27 +20,41 @@ function showReceiveInstructions(product = selectedProduct) {
     "followers-receive-link"
   ];
 
+  const extraLink = document.getElementById("extra-receive-link");
+
+  if (extraLink) {
+    if (extraLink.dataset.defaultHref === undefined) {
+      extraLink.dataset.defaultHref =
+        extraLink.getAttribute("href") || "";
+    }
+
+    extraLink.href = isFakeNumber
+      ? fakeNumberReceiveUrl
+      : extraLink.dataset.defaultHref;
+  }
+
   noteIds.forEach(function(id) {
     const note = document.getElementById(id);
+
     if (note) {
       note.textContent =
         "Depois de pagar, clique abaixo para enviar o comprovante e receber o produto";
-      note.classList.toggle(
-        "hidden",
-        id === "followers-receive-note" ? !isWhatsapp : isWhatsapp
-      );
-      note.style.display = (
-        id === "followers-receive-note" ? isWhatsapp : !isWhatsapp
-      ) ? "block" : "none";
+
+      const show =
+        id === "followers-receive-note" ? isWhatsapp : !isWhatsapp;
+
+      note.classList.toggle("hidden", !show);
+      note.style.display = show ? "block" : "none";
     }
   });
 
   linkIds.forEach(function(id) {
     const link = document.getElementById(id);
+
     if (link) {
-      const show = (
-        id === "followers-receive-link" ? isWhatsapp : !isWhatsapp
-      );
+      const show =
+        id === "followers-receive-link" ? isWhatsapp : !isWhatsapp;
+
       link.classList.toggle("hidden", !show);
       link.style.display = show ? "block" : "none";
     }
@@ -171,6 +190,7 @@ function renderProducts(products, container) {
     }
 
     const canAddToCart =
+      product.category !== "fake-number" &&
       cartProducts.includes(product.name);
 
     card.innerHTML = `
@@ -208,13 +228,20 @@ function renderProducts(products, container) {
             <button
               type="button"
               class="buy-button"
-              onclick='buyProduct(${JSON.stringify(product)})'
             >
               Comprar
             </button>
           `
       }
     `;
+
+    const buyButton = card.querySelector(".buy-button");
+
+    if (buyButton) {
+      buyButton.addEventListener("click", () => {
+        buyProduct(product);
+      });
+    }
 
     container.appendChild(card);
   });
@@ -714,7 +741,60 @@ function showSocialWarning(onContinue) {
   document.body.appendChild(modal);
 }
 
+
+function showFakeNumberTerms(onContinue) {
+  const terms = document.getElementById("fake-number-terms");
+
+  if (!terms) {
+    alert("Não foi possível carregar os termos de compra.");
+    return;
+  }
+
+  const modal = document.createElement("div");
+  modal.className = "social-warning-overlay";
+
+  const box = document.createElement("div");
+  box.className = "social-warning-box";
+
+  const content = terms.cloneNode(true);
+  content.removeAttribute("id");
+  content.classList.remove("hidden");
+  content.classList.add("fake-number-terms-modal");
+
+  const actions = document.createElement("div");
+  actions.className = "social-warning-actions";
+
+  const back = document.createElement("button");
+  back.type = "button";
+  back.className = "back-button";
+  back.textContent = "Voltar";
+
+  back.addEventListener("click", () => modal.remove());
+
+  const proceed = document.createElement("button");
+  proceed.type = "button";
+  proceed.className = "next-button";
+  proceed.textContent = "Li e aceito os termos";
+
+  proceed.addEventListener("click", () => {
+    modal.remove();
+    onContinue();
+  });
+
+  actions.append(back, proceed);
+  box.append(content, actions);
+  modal.appendChild(box);
+  document.body.appendChild(modal);
+}
+
 async function buyProduct(product) {
+
+  if (product.category === "fake-number") {
+    showFakeNumberTerms(function() {
+      continueBuyProduct(product);
+    });
+    return;
+  }
 
   if (product.category === "tiktok" || product.category === "instagram") {
     showSocialWarning(function() {
@@ -740,7 +820,6 @@ async function continueBuyProduct(product) {
   }
 
   selectedProduct = product;
-  showReceiveInstructions(product);
   showReceiveInstructions(product);
 
   const isWhatsapp =
@@ -1444,4 +1523,137 @@ if (welcomeCharacter) {
   });
 
   loadReviews();
+})();
+
+/* ATIVAÇÃO DE APP VIA NÚMERO VIRTUAL */
+(function() {
+  const prices = {
+    Telegram: [7, 16],
+    Instagram: [5, 6],
+    TikTok: [5, 5],
+    Discord: [4.5, 5],
+    Twitter: [5, 5],
+    Shein: [5, 5],
+    Facebook: [5.5, 5.5],
+    ChatGPT: [5.5, 6],
+    Microsoft: [4.5, 5],
+    Spotify: [6, 7],
+    Shopee: [6, 7]
+  };
+
+  const receiveUrl = "https://wa.me/639306838613?text=%3E%20manda%20junto%20com%20seu%20comprovante.%0A%0A%E1%8D%9D%D6%9F%E2%95%AD%E2%94%81%EA%AF%AD%E2%83%9C%E2%94%80%20%F0%9F%84%B5i%F0%9D%97%B0%CD%9Fh%CE%B1%D6%9F%E1%8D%9D%E3%85%A4%F0%9F%84%B3e%20%20%20%F0%9D%97%96%CD%9F%F0%96%A6%B9mpr%CE%B1%D6%9F%E1%8D%9D%20%20%E2%94%81%E2%B5%BF%CD%9E%E2%94%80%E2%95%AE%20%E1%8D%9D%D6%9F%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%AB%99%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Em%20qual%20aplicativo%20voc%C3%AA%20vai%20fazer%20a%20ativa%C3%A7%C3%A3o%20%3F%3F%0A%3E%20Apague%20aqui%20e%20escreva%20%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%8C%BC%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20Quanto%20voc%C3%AA%20pagou%20%3F%3F%0A%3E%20Apague%20aqui%20e%20escreva%0A%0A%EA%92%B0%20%CD%A1%EA%AF%AD%E1%8D%9D%D6%9F%F0%9F%AB%99%20%CD%A1%EA%92%B1%20%E0%A3%AA%20%F0%9D%82%85%20De%20qual%20pa%C3%ADs%20voc%C3%AA%20pegou%20%3F%3F%0A%3E%20Apague%20aqui%20e%20escreva";
+
+  const modal = document.getElementById("app-activation-modal");
+  const content = document.getElementById("app-activation-content");
+
+  if (!modal || !content) return;
+
+  let selectedApp = "";
+
+  function money(value) {
+    return value.toFixed(2).replace(".", ",");
+  }
+
+  function showApps() {
+    content.innerHTML = `
+      <h2>Ativação de app via número virtual</h2>
+      <p class="app-activation-description">
+        Você quer criar uma conta em um aplicativo, porém não quer correr o risco com seu número pessoal? Fazemos a ativação via número virtual.
+      </p>
+      <strong>Escolha o aplicativo:</strong>
+      <div class="app-activation-grid">
+        ${Object.keys(prices).map(app =>
+          `<button type="button" data-app="${app}">${app}</button>`
+        ).join("")}
+      </div>
+    `;
+  }
+
+  function showCountries(app) {
+    selectedApp = app;
+    const values = prices[app];
+
+    content.innerHTML = `
+      <h2>${app}</h2>
+      <p class="app-activation-description">Escolha o país do número virtual:</p>
+      <div class="app-activation-country-list">
+        <button type="button" class="app-country-option" data-country="Filipinas">
+          Filipinas <strong>R$ ${money(values[0])}</strong>
+        </button>
+        <button type="button" class="app-country-option" data-country="Brasil">
+          Brasil <strong>R$ ${money(values[1])}</strong>
+        </button>
+      </div>
+      <button type="button" class="app-activation-back" data-back>Voltar aos aplicativos</button>
+    `;
+  }
+
+  function showPayment(country) {
+    const index = country === "Filipinas" ? 0 : 1;
+    const price = prices[selectedApp][index];
+
+    content.innerHTML = `
+      <h2>Pagamento</h2>
+      <p><strong>${selectedApp} • ${country}</strong></p>
+      <div class="app-activation-payment">
+        <p>Valor: <strong>R$ ${money(price)}</strong></p>
+        <p>Chave Pix:</p>
+        <strong style="overflow-wrap:anywhere">gojosatorunaomorreu@gmail.com</strong>
+        <br>
+        <button type="button" id="copy-app-pix">Copiar chave Pix</button>
+      </div>
+      <p class="app-activation-description" style="margin-top:15px;text-align:center">
+        Depois de pagar, clique abaixo para mandar o comprovante e receber seu produto.
+      </p>
+      <a class="app-activation-receive" href="${receiveUrl}" target="_blank" rel="noopener">
+        Receber produto
+      </a>
+      <button type="button" class="app-activation-back" data-back>Voltar aos países</button>
+    `;
+
+    document.getElementById("copy-app-pix").addEventListener("click", async function() {
+      try {
+        await navigator.clipboard.writeText("gojosatorunaomorreu@gmail.com");
+        this.textContent = "Pix copiado!";
+      } catch {
+        const input = document.createElement("textarea");
+        input.value = "gojosatorunaomorreu@gmail.com";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        input.remove();
+        this.textContent = "Pix copiado!";
+      }
+    });
+  }
+
+  document.getElementById("open-app-activation").addEventListener("click", function() {
+    modal.classList.remove("hidden");
+    showApps();
+  });
+
+  document.getElementById("close-app-activation").addEventListener("click", function() {
+    modal.classList.add("hidden");
+  });
+
+  modal.addEventListener("click", function(event) {
+    if (event.target === modal) {
+      modal.classList.add("hidden");
+      return;
+    }
+
+    const appButton = event.target.closest("[data-app]");
+    const countryButton = event.target.closest("[data-country]");
+    const backButton = event.target.closest("[data-back]");
+
+    if (appButton) showCountries(appButton.dataset.app);
+    if (countryButton) showPayment(countryButton.dataset.country);
+    if (backButton) {
+      if (content.querySelector("[data-country]")) {
+        showApps();
+      } else {
+        showCountries(selectedApp);
+      }
+    }
+  });
 })();

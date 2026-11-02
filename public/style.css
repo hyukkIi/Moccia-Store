@@ -2002,3 +2002,387 @@ body.notification-open {
   line-height: 1.5;
   white-space: normal;
 }
+
+
+/* MOCCIA: BASE VISUAL CONSISTENTE */
+:root {
+  color-scheme: only light;
+  --blue: #9bdcff;
+  --blue-dark: #559dcc;
+  --blue-soft: #dff5ff;
+  --white: #ffffff;
+  --text: #315064;
+  --card-bg: #ffffff;
+}
+
+html {
+  color-scheme: only light;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-synthesis: none;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  color: #315064;
+  background-color: #dff5ff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: "Nunito", sans-serif;
+  font-size: inherit;
+}
+
+button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input,
+select,
+textarea {
+  color: #315064;
+}
+
+img {
+  max-width: 100%;
+}
+
+.page,
+.product-section,
+.extra-section,
+.product-scroll,
+.extra-grid {
+  min-width: 0;
+}
+
+.product-scroll {
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-card,
+.extra-card,
+.hero-card,
+.modal-box,
+#calculadora-votos {
+  color-scheme: only light;
+}
+
+/* Correção da janela de termos dos Números Fake */
+.social-warning-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 100000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 18px !important;
+  background: rgba(20, 35, 55, 0.65) !important;
+  pointer-events: auto !important;
+}
+
+.social-warning-box {
+  position: relative !important;
+  z-index: 100001 !important;
+  width: min(520px, 100%) !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+  padding: 22px !important;
+  background: #ffffff !important;
+  border-radius: 22px !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25) !important;
+  pointer-events: auto !important;
+}
+
+.social-warning-actions button {
+  position: relative !important;
+  z-index: 100002 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+
+/* LINK AVALIAR LOJA */
+.logo .store-review-link {
+  display: inline-block;
+  margin-top: 3px;
+  font-size: 19px;
+  line-height: 1.3;
+  font-weight: 900;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  text-decoration: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.38);
+  background: none;
+  animation: none;
+  transition: transform .2s;
+}
+
+.logo .store-review-link:active {
+  color: #24658f;
+  transform: scale(.96);
+}
+
+/* BOTÃO DE ATIVAÇÃO DE APLICATIVOS */
+.app-activation-card {
+  background: #ffffff !important;
+  border: 1px solid #d5efff;
+  box-shadow: 0 5px 16px rgba(65, 137, 174, 0.16);
+}
+
+.app-activation-card button {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 13px;
+  background: #acdfff;
+  color: #315064;
+  font-weight: 900;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.app-activation-card button:active {
+  transform: scale(.96);
+}
+
+/* ATIVAÇÃO DE APLICATIVOS */
+#app-activation-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: rgba(35, 65, 85, .58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#app-activation-modal.hidden {
+  display: none;
+}
+
+.app-activation-box {
+  width: min(480px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #fafdff;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.22);
+  color: #315064;
+}
+
+.app-activation-box h2 {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 21px;
+}
+
+.app-activation-description {
+  line-height: 1.6;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.app-activation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.app-activation-grid button,
+.app-country-option,
+.app-activation-back,
+.app-activation-close {
+  border: 1px solid #cceaff;
+  border-radius: 13px;
+  background: white;
+  color: #315064;
+  padding: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.app-activation-grid button:active,
+.app-country-option:active {
+  background: #dff3ff;
+  transform: scale(.97);
+}
+
+.app-activation-country-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.app-country-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-activation-payment {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 17px;
+  background: #e8f6ff;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.app-activation-payment button {
+  border: 0;
+  border-radius: 12px;
+  background: #acdfff;
+  color: #315064;
+  padding: 11px 16px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.app-activation-receive {
+  display: block;
+  margin-top: 13px;
+  color: #315064;
+  font-weight: 900;
+  text-decoration: none;
+  background: #acdfff;
+  border-radius: 13px;
+  padding: 13px;
+}
+
+.app-activation-back {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.app-activation-close {
+  display: block;
+  margin: 0 0 14px auto;
+  padding: 7px 13px;
+}
+
+/* BALÃO DE ATIVAÇÃO MAIS LARGO */
+.app-activation-box {
+  width: min(650px, 96%) !important;
+  max-width: 650px !important;
+  max-height: 82vh !important;
+  padding: 20px 24px !important;
+  border-radius: 22px !important;
+}
+
+.app-activation-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 10px !important;
+}
+
+.app-activation-description {
+  margin-bottom: 12px !important;
+}
+
+@media (max-width: 480px) {
+  .app-activation-box {
+    width: 96% !important;
+    padding: 17px !important;
+  }
+
+  .app-activation-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* BALÃO DE ATIVAÇÃO: MAIS LARGO E COMPACTO */
+.app-activation-box {
+  width: min(760px, 97%) !important;
+  max-width: 760px !important;
+  max-height: 72vh !important;
+  padding: 14px 24px !important;
+  border-radius: 20px !important;
+}
+
+.app-activation-box h2 {
+  margin-bottom: 7px !important;
+  font-size: 19px !important;
+}
+
+.app-activation-description {
+  margin-bottom: 9px !important;
+  line-height: 1.4 !important;
+}
+
+.app-activation-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 7px !important;
+}
+
+.app-activation-grid button {
+  padding: 9px 6px !important;
+}
+
+.app-activation-country-list {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 9px !important;
+}
+
+.app-activation-payment {
+  margin-top: 9px !important;
+  padding: 10px !important;
+}
+
+.app-activation-back {
+  margin-top: 8px !important;
+  padding: 8px !important;
+}
+
+@media (max-width: 480px) {
+  .app-activation-box {
+    width: 98% !important;
+    max-height: 76vh !important;
+    padding: 13px !important;
+  }
+
+  .app-activation-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* CARTÃO FAZER ATIVAÇÃO NA FILEIRA PRINCIPAL */
+#app-activation-entry {
+  width: 100%;
+}
+
+.app-activation-card {
+  width: 190px !important;
+  min-width: 190px !important;
+  min-height: 125px !important;
+  height: 125px !important;
+  padding: 10px !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px !important;
+}
+
+.app-activation-card .product-icon {
+  font-size: 20px !important;
+  margin: 0 !important;
+}
+
+.app-activation-card h3 {
+  font-size: 13px !important;
+  margin: 0 !important;
+}
+
+.app-activation-card button {
+  padding: 7px !important;
+  font-size: 12px !important;
+  margin: 0 !important;
+}

@@ -15,6 +15,7 @@
   <link rel="apple-touch-icon" href="/icone-moccia.jpg">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#dceeff">
+  <meta name="color-scheme" content="light">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +38,12 @@
 
 <div class="logo">
   <div>Moccia Store</div>
-
+  <a
+    class="store-review-link"
+    href="https://wa.me/639306838613?text=%E2%8F%9C%CD%A1%DD%84%E3%85%A4%D7%84%CB%96%E3%85%A4%E2%95%AD%E2%94%81%EA%AF%AD%E2%83%9C%E2%94%80%E3%85%A4%D7%85Avalia%C3%A7%C3%A3o%E3%85%A4%DD%81%E3%85%A4%E2%94%81%E2%B5%BF%CD%9E%E2%94%80%E2%95%AE%E3%85%A4%CB%96%D7%84%E3%85%A4%CD%A1%DD%84%E2%8F%9C%0A%0A%F0%90%94%8C%E1%A9%A7%20%D7%85%CB%99%E3%85%A4%DD%81%E3%85%A4%F0%9F%8F%AE%CC%B8%CC%B9%E2%83%9F%E2%9D%80%E3%85%A4%F0%9D%97%A2%20que%20achou%20do%20atendimento%20%3F%3F%0A%3E%20Apague%20aqui%20e%20escreva%0A%0A%F0%90%94%8C%E1%A9%A7%20%D7%85%CB%99%E3%85%A4%DD%81%E3%85%A4%F0%9F%AA%AD%CC%B8%CC%B9%E2%83%9F%E2%9D%80%E3%85%A4%F0%9D%97%A2%20%20que%20achou%20da%20organiza%C3%A7%C3%A3o%20%3F%3F%0A%3E%20Apague%20aqui%20e%20escreva%0A%0A%F0%90%94%8C%E1%A9%A7%20%D7%85%CB%99%E3%85%A4%DD%81%E3%85%A4%F0%9F%8F%AE%CC%B8%CC%B9%E2%83%9F%E2%9D%80%E3%85%A4%20%F0%9D%97%96onfi%C3%A1vel%20%3F%3F%0A%3E%20Apague%20aqui%20e%20escreva"
+    target="_blank"
+    rel="noopener noreferrer"
+  >avaliar loja</a>
 </div>
 
       <div class="cart" onclick="openCart()">
@@ -166,12 +172,47 @@
     <h2>Números Fake</h2>
   </div>
 
+  <div id="app-activation-entry" class="product-scroll">
+    <div class="product-card app-activation-card">
+      <div class="product-icon">📱</div>
+      <h3>Ativação de app via número virtual</h3>
+      <button type="button" id="open-app-activation">
+        Fazer ativação
+      </button>
+    </div>
+  </div>
+
   <div
     id="fake-number-products"
     class="product-scroll"
   ></div>
 
+  <div id="fake-number-terms" class="fake-number-terms hidden">
+    <h3>𓈒ʿʿ🍥୭ como funciona a compra?</h3>
+    <p>Você realiza o pagamento primeiro. Preciso receber o pagamento para adicionar o saldo ao aplicativo e, a partir dele, gerar o seu número.</p>
+    <p>O saldo utilizado para gerar os números fica dentro do aplicativo e não pode ser reembolsado após ser adicionado.</p>
+
+    <h3>𓈒ʿʿ🍥୭ como vou receber?</h3>
+    <p>Primeiro, você precisa ter um WhatsApp diferente do seu número pessoal caso vá colocar o número fake no mesmo celular.</p>
+    <p>Se você for utilizar o número fake em outro celular, pode usar qualquer WhatsApp disponível nele.</p>
+    <p>Depois do pagamento, eu vou gerar o número e passar ele para você. Você deverá adicionar esse número ao WhatsApp e aguardar o código de confirmação chegar para mim, para que eu possa te enviar o código.</p>
+
+    <h3>𓈒ʿʿ🍥୭ sobre a ativação</h3>
+    <p>Essa é a parte mais chatinha do processo. Nem todos os números gerados vão funcionar de primeira, então pode ser necessário tentar vários números até encontrar um que consiga receber o código corretamente.</p>
+    <p>Não precisa se preocupar caso não consigamos ativar o número no mesmo dia. Podemos continuar tentando novamente no dia seguinte até conseguirmos.</p>
+    <p>Ao realizar a compra, você declara estar ciente de como funciona o processo e das condições acima.</p>
+  </div>
+
+
 </section>
+
+
+<div id="app-activation-modal" class="hidden">
+  <div class="app-activation-box">
+    <button type="button" class="app-activation-close" id="close-app-activation">✕</button>
+    <div id="app-activation-content"></div>
+  </div>
+</div>
 
     <section class="extra-section">
 
