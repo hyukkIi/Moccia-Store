@@ -120,7 +120,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "100",
-    price: 1.90
+    price: 2.30
   },
 
   {
@@ -128,7 +128,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "200",
-    price: 2.80
+    price: 3.20
   },
 
   {
@@ -136,7 +136,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "300",
-    price: 3.80
+    price: 4.20
   },
 
   {
@@ -144,7 +144,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "400",
-    price: 4.80
+    price: 5.20
   },
 
   {
@@ -152,7 +152,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "500",
-    price: 5.80
+    price: 6.20
   },
 
   {
@@ -160,7 +160,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "600",
-    price: 6.80
+    price: 7.20
   },
 
   {
@@ -168,7 +168,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "700",
-    price: 7.80
+    price: 8.20
   },
 
   {
@@ -176,7 +176,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "800",
-    price: 8.80
+    price: 9.20
   },
 
   {
@@ -184,7 +184,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "900",
-    price: 9.80
+    price: 10.20
   },
 
   {
@@ -192,7 +192,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "1K",
-    price: 13.00
+    price: 13.40
   },
 
   {
@@ -200,7 +200,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "2K",
-    price: 17.00
+    price: 17.40
   },
 
   {
@@ -208,7 +208,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "3K",
-    price: 21.00
+    price: 21.40
   },
 
   {
@@ -216,7 +216,7 @@ const products = [
     name: "Seguidores WhatsApp",
     category: "whatsapp",
     quantity: "5K",
-    price: 31.00
+    price: 31.40
   },
 
 
@@ -227,7 +227,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "100",
-    price: 4.00
+    price: 4.60
   },
 
   {
@@ -235,7 +235,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "200",
-    price: 6.00
+    price: 6.60
   },
 
   {
@@ -243,7 +243,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "300",
-    price: 7.00
+    price: 7.60
   },
 
   {
@@ -251,7 +251,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "400",
-    price: 9.50
+    price: 10.10
   },
 
   {
@@ -259,7 +259,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "500",
-    price: 13.00
+    price: 13.60
   },
 
   {
@@ -267,7 +267,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "600",
-    price: 16.00
+    price: 16.60
   },
 
   {
@@ -275,7 +275,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "700",
-    price: 17.50
+    price: 18.10
   },
 
   {
@@ -283,7 +283,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "800",
-    price: 19.00
+    price: 19.60
   },
 
   {
@@ -291,7 +291,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "900",
-    price: 20.00
+    price: 20.60
   },
 
   {
@@ -299,7 +299,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "1K",
-    price: 25.00
+    price: 25.60
   },
 
   {
@@ -307,7 +307,7 @@ const products = [
     name: "Seguidores Brasileiros WhatsApp",
     category: "whatsapp-br",
     quantity: "2K",
-    price: 45.00
+    price: 45.60
   },
 
   // ROBLOX
@@ -317,7 +317,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "50",
-    price: 1.60
+    price: 2.00
   },
 
   {
@@ -325,7 +325,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "70",
-    price: 2.00
+    price: 2.40
   },
 
   {
@@ -333,7 +333,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "100",
-    price: 3.00
+    price: 3.40
   },
 
   {
@@ -341,7 +341,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "200",
-    price: 3.80
+    price: 4.20
   },
 
   {
@@ -349,7 +349,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "300",
-    price: 4.50
+    price: 4.90
   },
 
   {
@@ -357,7 +357,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "400",
-    price: 5.50
+    price: 5.90
   },
 
   {
@@ -365,7 +365,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "500",
-    price: 7.50
+    price: 7.90
   },
 
   {
@@ -373,7 +373,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "600",
-    price: 8.50
+    price: 8.90
   },
 
   {
@@ -381,7 +381,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "700",
-    price: 9.50
+    price: 9.90
   },
 
   {
@@ -389,7 +389,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "800",
-    price: 10.50
+    price: 10.90
   },
 
   {
@@ -397,7 +397,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "900",
-    price: 11.50
+    price: 11.90
   },
 
   {
@@ -405,7 +405,7 @@ const products = [
     name: "Robux",
     category: "roblox",
     quantity: "1K",
-    price: 13.00
+    price: 13.40
   },
 
   // NÚMEROS FAKE
